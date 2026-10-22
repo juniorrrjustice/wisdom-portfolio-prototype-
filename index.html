@@ -2411,13 +2411,117 @@
         }
     </style>
 
+
+
+    <style id="mobile-viewport-and-sticky-header-fix">
+      /* Reliable sizing even when the optional Tailwind CDN is slow or unavailable. */
+      *, *::before, *::after { box-sizing: border-box; }
+      html {
+        width: 100%;
+        max-width: 100%;
+        margin: 0;
+        overflow-x: clip;
+        scroll-padding-top: 78px;
+      }
+      body {
+        width: 100%;
+        max-width: 100%;
+        min-width: 0;
+        margin: 0;
+        overflow-x: clip;
+      }
+      img, video, iframe, canvas, svg { max-width: 100%; }
+      #main-background-wrapper {
+        width: 100%;
+        max-width: 100%;
+        min-width: 0;
+        overflow-x: clip;
+      }
+      /* Keep the header anchored to the viewport, independent of page transforms. */
+      #site-header {
+        position: fixed !important;
+        top: 0 !important;
+        left: 0 !important;
+        right: 0 !important;
+        width: 100% !important;
+        max-width: 100vw;
+        min-width: 0;
+        z-index: 10000;
+      }
+      .site-header-inner {
+        width: min(calc(100% - 1.5rem), 1360px);
+        max-width: 100%;
+        min-width: 0;
+      }
+      .site-nav-links, .hero-actions, .selected-work-format-switch,
+      .selected-work-controls, .creative-stats-grid, .tools-pill-cloud,
+      .video-showcase-heading, .contact-orbit-stage {
+        min-width: 0;
+        max-width: 100%;
+      }
+      section[id] { scroll-margin-top: 82px; }
+
+      @media (max-width: 767px) {
+        html, body { width: 100%; max-width: 100%; overflow-x: clip; }
+        #main-background-wrapper { width: 100%; max-width: 100%; overflow-x: clip; }
+        #hero-section.hero-modern,
+        #selected-work,
+        #creative-stats,
+        #video-showcase,
+        #contact-link-section,
+        #services,
+        #how-we-work,
+        #why-work-with-me,
+        #tools,
+        #about,
+        #testimonials,
+        #contact,
+        #faq,
+        #free-ai-video-idea,
+        #final-cta {
+          width: 100%;
+          max-width: 100%;
+          min-width: 0;
+          margin-left: 0;
+          margin-right: 0;
+        }
+        .hero-content-shell {
+          width: calc(100% - 2rem);
+          max-width: calc(100% - 2rem);
+          min-width: 0;
+        }
+        .hero-copy { min-width: 0; max-width: 100%; }
+        .hero-headline { max-width: 100%; overflow-wrap: normal; word-break: normal; }
+        .hero-description { max-width: 100%; }
+        .video-marquee-row { width: 100%; max-width: 100%; overflow: hidden; }
+        .selected-work-format-switch { width: 100%; justify-content: center; flex-wrap: wrap; }
+        .selected-work-controls { width: 100%; justify-content: center; flex-wrap: wrap; }
+        #contact-link-section .contact-orbit-stage { width: min(88vw, 360px); max-width: 100%; }
+        .mobile-nav-links { width: calc(100% - 1.5rem); max-width: 100%; }
+        /* Keep background glows visible but inside the page's clipping boundary. */
+        #selected-work::before, #selected-work::after,
+        #creative-stats::before, #creative-stats::after,
+        #services::before, #services::after,
+        #how-we-work::before, #how-we-work::after,
+        #why-work-with-me::before, #why-work-with-me::after,
+        #tools::before, #tools::after,
+        #about::before, #about::after,
+        #testimonials::before, #testimonials::after,
+        #contact::before, #contact::after,
+        #faq::before, #faq::after,
+        #free-ai-video-idea::before, #free-ai-video-idea::after,
+        #final-cta::before, #final-cta::after,
+        #video-showcase::after, #contact-link-section::after {
+          max-width: 100vw;
+        }
+      }
+    </style>
+
 </head>
 
 <body class="relative min-h-screen">
 
-    <!-- The full page wrapper is blurred while the case-study modal is open. -->
-    <div id="main-background-wrapper" class="relative min-h-screen">
-
+    <!-- Fixed navigation is outside the blurred content wrapper so it stays fixed on every device. -->
     <!-- Compact studio navigation inspired by the supplied reference. -->
     <nav id="site-header" class="site-header" aria-label="Main navigation">
         <div class="site-header-inner">
@@ -2450,6 +2554,11 @@
             <a href="#contact">Contact</a>
         </div>
     </nav>
+
+    <!-- The page content wrapper is blurred behind case-study dialogs. -->
+    <div id="main-background-wrapper" class="relative min-h-screen">
+
+
 
     <section id="hero-section" class="hero-modern" aria-labelledby="hero-title">
         <!-- The existing showreel now acts as a focused visual on the right, not a full-screen wash. -->
