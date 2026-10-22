@@ -618,6 +618,14 @@
             width: clamp(330px, 46vw, 510px);
         }
 
+        /* OlamaX is a widescreen 16:9 case study within the featured carousel. */
+        .vertical-work-slide[data-card-ratio="16:9"] {
+            width: clamp(360px, 48vw, 580px);
+        }
+        .vertical-work-slide[data-card-ratio="16:9"] .vertical-work-media-slot {
+            aspect-ratio: 16 / 9;
+        }
+
         .vertical-work-slide.swiper-slide-active {
             z-index: 5;
             opacity: 1;
@@ -882,6 +890,7 @@
             .vertical-work-slide { width: clamp(270px, 27vw, 320px); }
             .vertical-work-slide[data-orientation="horizontal"] { width: clamp(390px, 42vw, 530px); }
             .vertical-work-media-slot { aspect-ratio: 9 / 11; }
+            .vertical-work-slide[data-card-ratio="16:9"] { width: clamp(400px, 48vw, 590px); }
         }
 
         @media (max-width: 767px) {
@@ -903,6 +912,7 @@
             #selected-work.is-horizontal-mode .vertical-work-frame { height: clamp(350px, 44svh, 395px); }
             .vertical-work-slide { width: min(69vw, 286px); }
             .vertical-work-slide[data-orientation="horizontal"] { width: min(82vw, 390px); }
+            .vertical-work-slide[data-card-ratio="16:9"] { width: min(88vw, 440px); }
             .vertical-work-swiper { padding: .7rem 0 1.25rem; }
             .vertical-work-card { border-radius: 20px; }
             .vertical-work-caption { padding: .8rem .85rem .72rem; }
@@ -2517,6 +2527,116 @@
       }
     </style>
 
+    <style id="olamax-case-study-reader-styles">
+        .modal-panel.modal-story-mode { max-width: 1180px; }
+        .modal-story-mode #modal-video-col { min-width: 0; overflow: hidden; background: #05070d; }
+        .modal-story-mode #modal-content-col { min-width: 0; min-height: 0; overscroll-behavior: contain; scrollbar-color: rgba(112,56,245,.55) rgba(255,255,255,.045); scrollbar-width: thin; }
+        .case-study-video-placeholder { overflow: hidden; background: #07101f; }
+        .case-study-video-placeholder img { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; opacity:.82; }
+        .case-study-video-placeholder-shade { position:absolute; inset:0; background:linear-gradient(180deg,rgba(3,7,16,.04) 10%,rgba(3,7,16,.18) 42%,rgba(3,7,16,.93) 100%); }
+        .case-study-video-placeholder-caption { position:absolute; left:1.25rem; right:1.25rem; bottom:1.4rem; display:flex; flex-direction:column; gap:.45rem; color:#f8fafc; }
+        .case-study-video-placeholder-caption span { color:#8fc8ff; font-size:.62rem; font-weight:850; letter-spacing:.19em; }
+        .case-study-video-placeholder-caption strong { font-size:clamp(1.1rem,2vw,1.6rem); line-height:1.15; letter-spacing:-.035em; }
+        .case-study-video-placeholder-caption small { color:#bdc9dd; font-size:.78rem; line-height:1.5; }
+        .case-study-reader { width:100%; color:#dbe4f2; animation:caseStoryReaderIn .48s ease both; }
+        @keyframes caseStoryReaderIn { from { opacity:0; transform:translateY(8px); } to { opacity:1; transform:translateY(0); } }
+        .case-study-reader-intro { margin:0 0 1.2rem; }
+        .case-study-reader-label { display:flex; align-items:center; gap:.5rem; color:#a78bfa; font-size:.65rem; font-weight:850; letter-spacing:.16em; text-transform:uppercase; }
+        .case-study-reader-dot { width:7px; height:7px; border-radius:50%; background:#7038F5; box-shadow:0 0 13px rgba(112,56,245,.75); }
+        .case-study-reader-intro p { color:#aab6ca; font-size:.92rem; line-height:1.65; margin:.65rem 0 0; max-width:38rem; }
+        .case-study-quickfacts { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:.55rem; margin:1.15rem 0 1.35rem; }
+        .case-study-quickfacts > div { min-width:0; padding:.8rem .72rem; border:1px solid rgba(255,255,255,.085); border-radius:14px; background:rgba(255,255,255,.035); }
+        .case-study-quickfacts span { display:block; color:#8998b1; font-size:.57rem; font-weight:800; letter-spacing:.1em; line-height:1.4; }
+        .case-study-quickfacts strong { display:block; margin-top:.35rem; color:#f6f8ff; font-size:.8rem; line-height:1.35; overflow-wrap:anywhere; }
+        .case-study-reading-progress { padding:.75rem 0 .45rem; }
+        .case-study-reading-progress-top { display:flex; align-items:center; justify-content:space-between; gap:1rem; color:#8d9bb3; font-size:.62rem; font-weight:850; letter-spacing:.13em; }
+        .case-study-reading-progress-top strong { color:#c4b5fd; font-variant-numeric:tabular-nums; }
+        .case-study-progress-track { height:3px; margin-top:.7rem; overflow:hidden; border-radius:999px; background:rgba(255,255,255,.08); }
+        .case-study-progress-track span { display:block; height:100%; border-radius:inherit; background:linear-gradient(90deg,#7038F5,#60A5FA); box-shadow:0 0 12px rgba(112,56,245,.4); transition:width .38s ease; }
+        .case-study-chapter-nav { position:sticky; top:-1px; z-index:15; display:flex; gap:.4rem; margin:0 -.4rem 1.15rem; padding:.7rem .4rem; overflow-x:auto; overscroll-behavior-x:contain; scrollbar-width:none; background:linear-gradient(180deg,rgba(5,7,11,.97),rgba(5,7,11,.89)); border-bottom:1px solid rgba(255,255,255,.065); }
+        .case-study-chapter-nav::-webkit-scrollbar { display:none; }
+        .case-study-chapter-tab { display:inline-flex; align-items:center; gap:.4rem; flex:0 0 auto; min-height:36px; padding:.48rem .65rem; border:1px solid rgba(255,255,255,.09); border-radius:999px; color:#9eabc1; background:rgba(255,255,255,.025); font-size:.68rem; font-weight:750; white-space:nowrap; cursor:pointer; transition:background .22s ease,color .22s ease,border-color .22s ease,transform .22s ease; }
+        .case-study-chapter-tab span { color:#8592aa; font-size:.58rem; font-weight:850; }
+        .case-study-chapter-tab:hover { color:#fff; border-color:rgba(112,56,245,.55); }
+        .case-study-chapter-tab.is-active { color:#fff; border-color:rgba(112,56,245,.58); background:rgba(112,56,245,.2); box-shadow:inset 0 0 0 1px rgba(112,56,245,.07); }
+        .case-study-chapter-tab.is-active span { color:#c4b5fd; }
+        .case-study-chapter-tab:focus-visible { outline:2px solid #a78bfa; outline-offset:3px; }
+        .case-study-chapters { display:flex; flex-direction:column; gap:.95rem; }
+        .case-study-chapter { position:relative; min-width:0; padding:1.15rem 1.05rem 1.2rem; border:1px solid rgba(255,255,255,.075); border-radius:18px; background:linear-gradient(140deg,rgba(17,24,42,.8),rgba(8,13,24,.72)); box-shadow:0 12px 28px rgba(0,0,0,.12); opacity:.32; filter:blur(6px); transform:translateY(13px); transition:opacity .65s ease,filter .65s ease,transform .65s cubic-bezier(.2,.7,.2,1),border-color .25s ease; scroll-margin-top:100px; }
+        .case-study-chapter.is-revealed { opacity:1; filter:blur(0); transform:translateY(0); }
+        .case-study-chapter.is-revealed:hover { border-color:rgba(112,56,245,.24); }
+        .case-study-chapter-head { display:flex; align-items:center; justify-content:space-between; gap:.7rem; margin-bottom:.7rem; }
+        .case-study-chapter-kicker { color:#9d8bf8; font-size:.59rem; font-weight:850; letter-spacing:.14em; line-height:1.5; }
+        .case-study-chapter-index { color:rgba(167,139,250,.2); font-size:1.85rem; font-weight:900; line-height:1; letter-spacing:-.06em; }
+        .case-study-chapter h3 { margin:0 0 .7rem; color:#f6f8ff; font-size:clamp(1.14rem,2vw,1.48rem); line-height:1.2; letter-spacing:-.035em; font-weight:850; }
+        .case-study-chapter-copy p,.case-study-chapter > p { margin:.55rem 0 0; color:#b1bdd0; font-size:.86rem; line-height:1.8; overflow-wrap:anywhere; }
+        .case-study-subhead { margin:1.05rem 0 .3rem; color:#e8eaff; font-size:.82rem; font-weight:800; }
+        .case-study-subhead + p { margin:.3rem 0 0; color:#b1bdd0; font-size:.83rem; line-height:1.75; }
+        .case-study-facts { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:.5rem; margin-top:1rem; }
+        .case-study-feature-list { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:.5rem; margin:1rem 0 0; padding:0; list-style:none; }
+        .case-study-feature-list li { display:flex; align-items:flex-start; gap:.5rem; padding:.65rem .7rem; border:1px solid rgba(96,165,250,.13); border-radius:11px; background:rgba(37,99,235,.055); color:#c3d0e3; font-size:.73rem; line-height:1.55; }
+        .case-study-feature-list li span { flex:0 0 auto; color:#9f8cff; font-weight:900; }
+        .case-study-fact { padding:.72rem .7rem; border-radius:12px; background:rgba(112,56,245,.085); border:1px solid rgba(112,56,245,.16); }
+        .case-study-fact span { display:block; color:#9aa8bd; font-size:.62rem; line-height:1.4; }
+        .case-study-fact strong { display:block; margin-top:.25rem; color:#f1eeff; font-size:.76rem; line-height:1.45; }
+        .case-study-workflow { display:flex; flex-direction:column; gap:.55rem; margin-top:1rem; }
+        .case-study-workflow-step { display:grid; grid-template-columns:32px minmax(0,1fr); gap:.7rem; align-items:start; padding:.7rem; border-radius:12px; background:rgba(255,255,255,.027); border:1px solid rgba(255,255,255,.055); }
+        .case-study-workflow-num { display:grid; place-items:center; width:30px; height:30px; border-radius:10px; color:#dcd1ff; background:rgba(112,56,245,.18); border:1px solid rgba(112,56,245,.23); font-size:.65rem; font-weight:850; }
+        .case-study-workflow-title { color:#f2f5fc; font-size:.79rem; font-weight:800; line-height:1.4; }
+        .case-study-workflow-tool { display:inline-block; margin-top:.17rem; color:#8ec8ff; font-size:.65rem; font-weight:750; }
+        .case-study-workflow-step p { margin:.22rem 0 0; color:#9fadc3; font-size:.75rem; line-height:1.6; }
+        .case-study-assets-grid { display:grid; gap:.6rem; margin-top:.9rem; }
+        .case-study-assets-grid--two { grid-template-columns:repeat(2,minmax(0,1fr)); }
+        .case-study-assets-grid--three { grid-template-columns:repeat(2,minmax(0,1fr)); }
+        .case-study-asset { min-width:0; overflow:hidden; margin:0; border-radius:12px; border:1px solid rgba(255,255,255,.085); background:rgba(2,5,12,.38); }
+        .case-study-asset > img { display:block; width:100%; aspect-ratio:4/3; object-fit:cover; }
+        .case-study-asset figcaption { display:flex; flex-direction:column; gap:.25rem; padding:.65rem; }
+        .case-study-asset figcaption strong { color:#e9eef9; font-size:.72rem; line-height:1.45; }
+        .case-study-asset figcaption span { color:#91a0b7; font-size:.66rem; line-height:1.55; }
+        .case-study-asset figcaption small { color:#a99aff; font-size:.6rem; font-weight:800; letter-spacing:.04em; text-transform:uppercase; }
+        .case-study-asset--placeholder .case-study-asset-art { position:relative; display:grid; place-items:center; aspect-ratio:4/3; overflow:hidden; background:radial-gradient(ellipse at 50% 100%,rgba(112,56,245,.25),transparent 68%),linear-gradient(145deg,#10182b,#070b14); }
+        .case-study-asset-frame { position:absolute; inset:13%; border:1px dashed rgba(165,145,255,.27); border-radius:8px; }
+        .case-study-asset-plus { display:grid; place-items:center; width:35px; height:35px; border-radius:50%; color:#c4b5fd; background:rgba(112,56,245,.15); border:1px solid rgba(167,139,250,.2); font-size:1.3rem; }
+        .case-study-video-note { display:grid; grid-template-columns:42px minmax(0,1fr); gap:.75rem; align-items:start; margin-top:1rem; padding:.9rem; border:1px solid rgba(96,165,250,.17); border-radius:14px; background:rgba(37,99,235,.065); }
+        .case-study-video-icon { display:grid; place-items:center; width:40px; height:40px; border-radius:12px; color:#93c5fd; background:rgba(37,99,235,.15); }
+        .case-study-video-icon svg { width:20px; height:20px; }
+        .case-study-video-note strong { color:#f3f7ff; font-size:.82rem; }
+        .case-study-video-note p { margin:.3rem 0 0; color:#aab8ce; font-size:.74rem; line-height:1.7; }
+        .case-study-credits { display:flex; flex-direction:column; gap:.2rem; margin-top:.95rem; border-top:1px solid rgba(255,255,255,.08); }
+        .case-study-credit { display:grid; grid-template-columns:88px minmax(0,1fr); gap:.75rem; padding:.65rem 0; border-bottom:1px solid rgba(255,255,255,.055); }
+        .case-study-credit > span { color:#9f8cff; font-size:.66rem; font-weight:800; }
+        .case-study-credit p { margin:0; color:#c1ccdc; font-size:.75rem; line-height:1.65; }
+        .case-study-reader-footnote { margin:1rem .15rem 0; color:#71819b; font-size:.65rem; line-height:1.55; }
+        @media (max-width:767px) {
+            #case-study-modal:has(.modal-story-mode) { padding-top:.6rem!important; padding-bottom:.6rem!important; }
+            .modal-panel.modal-story-mode { display:flex; flex-direction:column; max-height:calc(100dvh - 1.2rem); border-radius:22px; }
+            .modal-story-mode #modal-video-col { flex:0 0 auto; width:100%; height:clamp(190px,28svh,265px); min-height:0; aspect-ratio:auto; border-right:0; border-bottom:1px solid rgba(255,255,255,.1); }
+            .modal-story-mode #modal-content-col { flex:1 1 auto; width:100%; padding:1.05rem 1rem 1.25rem; overflow-y:auto; }
+            .modal-story-mode #modal-title { font-size:1.55rem; line-height:1.12; padding-right:1.7rem; margin-bottom:.6rem; }
+            .modal-story-mode #modal-brand { font-size:.76rem; }
+            .modal-story-mode #modal-cta { padding:.8rem .9rem; font-size:.92rem; }
+            .case-study-quickfacts { grid-template-columns:repeat(3,minmax(0,1fr)); gap:.38rem; }
+            .case-study-quickfacts > div { padding:.6rem .5rem; }
+            .case-study-quickfacts span { font-size:.52rem; letter-spacing:.06em; }
+            .case-study-quickfacts strong { font-size:.7rem; }
+            .case-study-chapter { padding:.95rem .8rem 1rem; }
+            .case-study-chapter-copy p,.case-study-chapter > p { font-size:.82rem; line-height:1.75; }
+            .case-study-chapter-tab { padding:.44rem .58rem; font-size:.65rem; }
+            .case-study-assets-grid--three { grid-template-columns:repeat(2,minmax(0,1fr)); }
+            .case-study-feature-list { grid-template-columns:minmax(0,1fr); }
+            .case-study-credit { grid-template-columns:72px minmax(0,1fr); gap:.55rem; }
+        }
+        @media (max-width:390px) {
+            .case-study-quickfacts { grid-template-columns:repeat(2,minmax(0,1fr)); }
+            .case-study-quickfacts > div:last-child { grid-column:1 / -1; }
+            .case-study-assets-grid--two,.case-study-assets-grid--three { grid-template-columns:minmax(0,1fr); }
+        }
+        @media (prefers-reduced-motion:reduce) {
+            .case-study-reader,.case-study-chapter,.case-study-progress-track span,.case-study-chapter-tab { animation:none!important; transition:none!important; }
+            .case-study-chapter { opacity:1; filter:none; transform:none; }
+        }
+    </style>
+
 </head>
 
 <body class="relative min-h-screen">
@@ -3257,7 +3377,7 @@
                 <!-- Injected via JS -->
             </div>
 
-            <div
+            <div id="modal-content-col"
                 class="flex-1 flex flex-col p-6 md:p-10 overflow-y-auto modal-scroll text-white w-full bg-[var(--bg-deep)]">
                 <div class="mb-8">
                     <div class="flex items-center gap-3 mb-3">
@@ -3268,8 +3388,9 @@
                     <h2 id="modal-title" class="text-3xl md:text-4xl font-bold tracking-tight mb-6 text-white"></h2>
 
                     <p id="modal-overview" class="text-[var(--text-main)] leading-relaxed text-lg mb-8"></p>
+                    <div id="modal-story-reader" class="case-study-reader hidden" aria-label="Interactive project case study"></div>
 
-                    <div class="space-y-6">
+                    <div class="space-y-6" id="modal-generic-details">
                         <div id="modal-challenge-section" class="hidden">
                             <h3 class="text-sm font-bold uppercase tracking-widest text-[var(--brand-light)] mb-2">The
                                 Challenge</h3>
@@ -3351,10 +3472,107 @@
             heroVideo: { vimeoId: "1236463039", vimeoHash: "" }
         };
 
+        const OLAMAX_POSTER_DATA_URL = 'data:image/svg+xml;charset=UTF-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%201600%20900%22%3E%0A%20%20%3Cdefs%3E%0A%20%20%20%20%3ClinearGradient%20id%3D%22bg%22%20x1%3D%220%22%20y1%3D%220%22%20x2%3D%221%22%20y2%3D%221%22%3E%3Cstop%20offset%3D%220%22%20stop-color%3D%22%2307152b%22%2F%3E%3Cstop%20offset%3D%22.52%22%20stop-color%3D%22%23102c61%22%2F%3E%3Cstop%20offset%3D%221%22%20stop-color%3D%22%23090b1c%22%2F%3E%3C%2FlinearGradient%3E%0A%20%20%20%20%3CradialGradient%20id%3D%22blue%22%20cx%3D%2228%25%22%20cy%3D%2260%25%22%20r%3D%2265%25%22%3E%3Cstop%20offset%3D%220%22%20stop-color%3D%22%23147cff%22%20stop-opacity%3D%22.68%22%2F%3E%3Cstop%20offset%3D%221%22%20stop-color%3D%22%23147cff%22%20stop-opacity%3D%220%22%2F%3E%3C%2FradialGradient%3E%0A%20%20%20%20%3CradialGradient%20id%3D%22violet%22%20cx%3D%2287%25%22%20cy%3D%2218%25%22%20r%3D%2263%25%22%3E%3Cstop%20offset%3D%220%22%20stop-color%3D%22%237038f5%22%20stop-opacity%3D%22.62%22%2F%3E%3Cstop%20offset%3D%221%22%20stop-color%3D%22%237038f5%22%20stop-opacity%3D%220%22%2F%3E%3C%2FradialGradient%3E%0A%20%20%20%20%3ClinearGradient%20id%3D%22phone%22%20x1%3D%220%22%20y1%3D%220%22%20x2%3D%221%22%20y2%3D%221%22%3E%3Cstop%20offset%3D%220%22%20stop-color%3D%22%231e3f73%22%2F%3E%3Cstop%20offset%3D%221%22%20stop-color%3D%22%23070d1a%22%2F%3E%3C%2FlinearGradient%3E%0A%20%20%20%20%3ClinearGradient%20id%3D%22screen%22%20x1%3D%220%22%20y1%3D%220%22%20x2%3D%220%22%20y2%3D%221%22%3E%3Cstop%20offset%3D%220%22%20stop-color%3D%22%23123e83%22%2F%3E%3Cstop%20offset%3D%221%22%20stop-color%3D%22%2307172e%22%2F%3E%3C%2FlinearGradient%3E%0A%20%20%20%20%3Cfilter%20id%3D%22glow%22%3E%3CfeGaussianBlur%20stdDeviation%3D%2222%22%2F%3E%3C%2Ffilter%3E%0A%20%20%3C%2Fdefs%3E%0A%20%20%3Crect%20width%3D%221600%22%20height%3D%22900%22%20fill%3D%22url%28%23bg%29%22%2F%3E%3Crect%20width%3D%221600%22%20height%3D%22900%22%20fill%3D%22url%28%23blue%29%22%2F%3E%3Crect%20width%3D%221600%22%20height%3D%22900%22%20fill%3D%22url%28%23violet%29%22%2F%3E%0A%20%20%3Cg%20opacity%3D%22.11%22%20stroke%3D%22%239bc8ff%22%20stroke-width%3D%222%22%3E%3Cpath%20d%3D%22M0%20150H1600M0%20300H1600M0%20450H1600M0%20600H1600M0%20750H1600%22%2F%3E%3Cpath%20d%3D%22M160%200V900M320%200V900M480%200V900M640%200V900M800%200V900M960%200V900M1120%200V900M1280%200V900M1440%200V900%22%2F%3E%3C%2Fg%3E%0A%20%20%3Cellipse%20cx%3D%221125%22%20cy%3D%22690%22%20rx%3D%22270%22%20ry%3D%2268%22%20fill%3D%22%23167dff%22%20opacity%3D%22.28%22%20filter%3D%22url%28%23glow%29%22%2F%3E%0A%20%20%3Cg%20transform%3D%22translate%281010%20112%29%20rotate%287%20170%20340%29%22%3E%0A%20%20%20%20%3Crect%20x%3D%22-10%22%20y%3D%22-10%22%20width%3D%22360%22%20height%3D%22700%22%20rx%3D%2254%22%20fill%3D%22%2354b8ff%22%20opacity%3D%22.18%22%20filter%3D%22url%28%23glow%29%22%2F%3E%0A%20%20%20%20%3Crect%20x%3D%220%22%20y%3D%220%22%20width%3D%22340%22%20height%3D%22680%22%20rx%3D%2248%22%20fill%3D%22%23050914%22%20stroke%3D%22%2380c8ff%22%20stroke-opacity%3D%22.8%22%20stroke-width%3D%224%22%2F%3E%0A%20%20%20%20%3Crect%20x%3D%2217%22%20y%3D%2220%22%20width%3D%22306%22%20height%3D%22640%22%20rx%3D%2234%22%20fill%3D%22url%28%23screen%29%22%2F%3E%0A%20%20%20%20%3Crect%20x%3D%22110%22%20y%3D%2231%22%20width%3D%22120%22%20height%3D%2218%22%20rx%3D%229%22%20fill%3D%22%2302050c%22%2F%3E%0A%20%20%20%20%3Ctext%20x%3D%2242%22%20y%3D%22100%22%20font-family%3D%22Arial%2Csans-serif%22%20font-size%3D%2228%22%20font-weight%3D%22700%22%20fill%3D%22%23f6f9ff%22%3EOLAMAX%3C%2Ftext%3E%0A%20%20%20%20%3Ctext%20x%3D%2242%22%20y%3D%22133%22%20font-family%3D%22Arial%2Csans-serif%22%20font-size%3D%2215%22%20letter-spacing%3D%224%22%20fill%3D%22%237dc5ff%22%3EDIGITAL%20ASSETS%3C%2Ftext%3E%0A%20%20%20%20%3Crect%20x%3D%2240%22%20y%3D%22172%22%20width%3D%22260%22%20height%3D%22138%22%20rx%3D%2220%22%20fill%3D%22%23ffffff%22%20fill-opacity%3D%22.07%22%20stroke%3D%22%2380bdff%22%20stroke-opacity%3D%22.35%22%2F%3E%0A%20%20%20%20%3Ctext%20x%3D%2261%22%20y%3D%22210%22%20font-family%3D%22Arial%2Csans-serif%22%20font-size%3D%2217%22%20fill%3D%22%23a8c4e8%22%3ETOTAL%20BALANCE%3C%2Ftext%3E%0A%20%20%20%20%3Ctext%20x%3D%2261%22%20y%3D%22259%22%20font-family%3D%22Arial%2Csans-serif%22%20font-size%3D%2235%22%20font-weight%3D%22700%22%20fill%3D%22%23ffffff%22%3E%2412%2C840.50%3C%2Ftext%3E%0A%20%20%20%20%3Cpath%20d%3D%22M60%20285L100%20267%20136%20279%20172%20238%20210%20249%20244%20218%20280%20229%22%20fill%3D%22none%22%20stroke%3D%22%2357c0ff%22%20stroke-width%3D%225%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%2F%3E%0A%20%20%20%20%3Cg%20transform%3D%22translate%2842%20346%29%22%3E%3Crect%20width%3D%22118%22%20height%3D%2278%22%20rx%3D%2214%22%20fill%3D%22%23167cff%22%2F%3E%3Ctext%20x%3D%2259%22%20y%3D%2234%22%20font-family%3D%22Arial%2Csans-serif%22%20font-size%3D%2215%22%20text-anchor%3D%22middle%22%20fill%3D%22%23dceeff%22%3EBUY%20%2F%20SELL%3C%2Ftext%3E%3Ctext%20x%3D%2259%22%20y%3D%2257%22%20font-family%3D%22Arial%2Csans-serif%22%20font-size%3D%2212%22%20text-anchor%3D%22middle%22%20fill%3D%22%23ffffff%22%3ECrypto%3C%2Ftext%3E%3C%2Fg%3E%0A%20%20%20%20%3Cg%20transform%3D%22translate%28177%20346%29%22%3E%3Crect%20width%3D%22123%22%20height%3D%2278%22%20rx%3D%2214%22%20fill%3D%22%23ffffff%22%20fill-opacity%3D%22.075%22%20stroke%3D%22%239bcaff%22%20stroke-opacity%3D%22.24%22%2F%3E%3Ctext%20x%3D%2261%22%20y%3D%2234%22%20font-family%3D%22Arial%2Csans-serif%22%20font-size%3D%2215%22%20text-anchor%3D%22middle%22%20fill%3D%22%23dceeff%22%3ETRANSFER%3C%2Ftext%3E%3Ctext%20x%3D%2261%22%20y%3D%2257%22%20font-family%3D%22Arial%2Csans-serif%22%20font-size%3D%2212%22%20text-anchor%3D%22middle%22%20fill%3D%22%23ffffff%22%3EAssets%3C%2Ftext%3E%3C%2Fg%3E%0A%20%20%20%20%3Cg%20fill%3D%22%23b8d8ff%22%20opacity%3D%22.78%22%3E%3Ccircle%20cx%3D%2258%22%20cy%3D%22474%22%20r%3D%2218%22%2F%3E%3Ccircle%20cx%3D%22130%22%20cy%3D%22474%22%20r%3D%2218%22%2F%3E%3Ccircle%20cx%3D%22202%22%20cy%3D%22474%22%20r%3D%2218%22%2F%3E%3Ccircle%20cx%3D%22274%22%20cy%3D%22474%22%20r%3D%2218%22%2F%3E%3C%2Fg%3E%0A%20%20%20%20%3Crect%20x%3D%2242%22%20y%3D%22524%22%20width%3D%22258%22%20height%3D%2218%22%20rx%3D%229%22%20fill%3D%22%23ffffff%22%20fill-opacity%3D%22.12%22%2F%3E%3Crect%20x%3D%2242%22%20y%3D%22557%22%20width%3D%22205%22%20height%3D%2218%22%20rx%3D%229%22%20fill%3D%22%23ffffff%22%20fill-opacity%3D%22.08%22%2F%3E%3Crect%20x%3D%2242%22%20y%3D%22590%22%20width%3D%22232%22%20height%3D%2218%22%20rx%3D%229%22%20fill%3D%22%23ffffff%22%20fill-opacity%3D%22.08%22%2F%3E%0A%20%20%3C%2Fg%3E%0A%20%20%3Cg%20transform%3D%22translate%28210%20470%29%22%3E%3Ccircle%20r%3D%22105%22%20fill%3D%22%2365b9ff%22%20opacity%3D%22.14%22%2F%3E%3Ccircle%20r%3D%2282%22%20fill%3D%22%230c1e3b%22%20stroke%3D%22%238ccfff%22%20stroke-width%3D%223%22%2F%3E%3Ccircle%20r%3D%2264%22%20fill%3D%22%231269d4%22%2F%3E%3Ctext%20x%3D%220%22%20y%3D%2222%22%20text-anchor%3D%22middle%22%20font-family%3D%22Arial%2Csans-serif%22%20font-weight%3D%22800%22%20font-size%3D%2270%22%20fill%3D%22%23ffffff%22%3E%E2%82%BF%3C%2Ftext%3E%3C%2Fg%3E%0A%20%20%3Cg%20transform%3D%22translate%28470%20675%29%22%3E%3Ccircle%20r%3D%2246%22%20fill%3D%22%237038f5%22%20opacity%3D%22.35%22%2F%3E%3Ccircle%20r%3D%2234%22%20fill%3D%22%230c1d36%22%20stroke%3D%22%23a891ff%22%20stroke-width%3D%223%22%2F%3E%3Ctext%20x%3D%220%22%20y%3D%2212%22%20text-anchor%3D%22middle%22%20font-family%3D%22Arial%2Csans-serif%22%20font-weight%3D%22800%22%20font-size%3D%2230%22%20fill%3D%22%23ded4ff%22%3EX%3C%2Ftext%3E%3C%2Fg%3E%0A%20%20%3Ctext%20x%3D%2292%22%20y%3D%22130%22%20font-family%3D%22Arial%2Csans-serif%22%20font-weight%3D%22800%22%20font-size%3D%2224%22%20letter-spacing%3D%227%22%20fill%3D%22%2389ccff%22%3EAI-POWERED%203D%20ADVERTISEMENT%3C%2Ftext%3E%0A%20%20%3Ctext%20x%3D%2292%22%20y%3D%22205%22%20font-family%3D%22Arial%2Csans-serif%22%20font-weight%3D%22800%22%20font-size%3D%2270%22%20letter-spacing%3D%22-2%22%20fill%3D%22%23ffffff%22%3EBring%20the%20app%3C%2Ftext%3E%0A%20%20%3Ctext%20x%3D%2292%22%20y%3D%22282%22%20font-family%3D%22Arial%2Csans-serif%22%20font-weight%3D%22800%22%20font-size%3D%2270%22%20letter-spacing%3D%22-2%22%20fill%3D%22%23ffffff%22%3Eto%20life.%3C%2Ftext%3E%0A%20%20%3Ctext%20x%3D%2294%22%20y%3D%22338%22%20font-family%3D%22Arial%2Csans-serif%22%20font-size%3D%2224%22%20fill%3D%22%23c0d6f4%22%3EOLAMAX%20%C2%B7%20CRYPTO%20APP%20FILM%3C%2Ftext%3E%0A%20%20%3Crect%20x%3D%2290%22%20y%3D%22775%22%20width%3D%221420%22%20height%3D%222%22%20fill%3D%22%2390bdff%22%20opacity%3D%22.25%22%2F%3E%0A%20%20%3Ctext%20x%3D%2292%22%20y%3D%22825%22%20font-family%3D%22Arial%2Csans-serif%22%20font-size%3D%2218%22%20font-weight%3D%22700%22%20letter-spacing%3D%225%22%20fill%3D%22%239acfff%22%3EPROJECT%20PREVIEW%3C%2Ftext%3E%0A%20%20%3Ctext%20x%3D%221508%22%20y%3D%22825%22%20text-anchor%3D%22end%22%20font-family%3D%22Arial%2Csans-serif%22%20font-size%3D%2218%22%20fill%3D%22%239acfff%22%3E16%3A9%3C%2Ftext%3E%0A%3C%2Fsvg%3E';
+
         const PROJECTS = [
             {
                 id: "hero-reel", title: "Cinematic Visual Storytelling", brand: "Wisdom Aghedo Showreel", category: "Director's Cut", orientation: "horizontal", vimeoId: "1236463039", vimeoHash: "", thumbnail: "/hero-poster.jpg",
                 caseStudy: { overview: "A compilation of my best AI-generated commercials, realistic visual storytelling, and 3D product animations.", tools: ["Midjourney v6", "Runway Gen-2", "After Effects", "ElevenLabs"], deliverables: ["1x Master Showreel"], duration: "2024 - 2026" }
+            },
+            {
+                id: "proj-olamax-vertical", featured: true,
+                title: "OlamaX Crypto App Ad",
+                brand: "OlamaX", category: "AI App Advertisement", orientation: "vertical", cardAspectRatio: "16:9",
+                vimeoId: "1236463039", vimeoHash: "", thumbnail: OLAMAX_POSTER_DATA_URL,
+                caseStudy: {
+                    caseStudyTitle: "Bringing a Crypto App to Life Through AI-Powered 3D Animation",
+                    overview: "OlamaX had recently launched its mobile app and needed promotional content to introduce the platform and communicate its features. I developed the concept and script, created the AI-generated 3D animation, and handled the editing and final delivery. The goal was to communicate the app's features through engaging visual storytelling rather than a conventional product demonstration.",
+                    role: "AI Video Creator, Scriptwriter, and Video Editor",
+                    duration: "1 minute",
+                    productionTimeline: "1–2 days",
+                    tools: ["Gemini", "Nano Banana", "Google Flow", "CapCut"],
+                    deliverables: ["One-minute AI-generated 3D animated advertisement"],
+                    result: "The video was completed within 1–2 days and approved by the client immediately after delivery. OlamaX subsequently published the advertisement across its social media platforms.",
+                    finalVideoVimeoId: "1236463039",
+                    finalVideoMp4Url: "",
+                    mediaAssets: [
+                        { title: "Character 01 reference sheet", caption: "AI-generated character design and visual reference.", src: "" },
+                        { title: "Character 02 reference sheet", caption: "AI-generated character design and visual reference.", src: "" },
+                        { title: "Generated images", caption: "Selected images created during production.", src: "" },
+                        { title: "Animation frames", caption: "A few frames from the generated scenes.", src: "" },
+                        { title: "CapCut editing timeline", caption: "A production screenshot showing the edit in progress.", src: "" }
+                    ],
+                    chapters: [
+                        {
+                            navLabel: "Overview",
+                            kicker: "01 / THE BRIEF",
+                            title: "Project overview",
+                            paragraphs: [
+                                "OlamaX had recently launched its mobile app and needed promotional content to introduce the platform and communicate its features.",
+                                "I developed the concept and script, created the AI-generated 3D animation, and handled the editing and final delivery.",
+                                "The goal was to explain the app through engaging visual storytelling rather than a conventional product demonstration."
+                            ],
+                            facts: [{ label: "Deliverable", value: "1-minute ad" }, { label: "Production", value: "1–2 days" }, { label: "My role", value: "End-to-end creator" }]
+                        },
+                        {
+                            navLabel: "Creative direction",
+                            kicker: "02 / CREATIVE DIRECTION",
+                            title: "A character-led 3D approach",
+                            paragraphs: [
+                                "After researching advertising styles in the digital services market, I chose 3D animation as the creative direction for the project.",
+                                "Having observed brands such as OPay use this style, I explored a similar approach for OlamaX. The focus was to showcase the app's features with an engaging and distinctive visual presentation."
+                            ],
+                            subhead: "Character design",
+                            subparagraphs: [
+                                "I designed two AI characters and created character reference sheets to guide their appearance throughout production. These references helped establish a visual guide before generating the animated scenes."
+                            ],
+                            mediaAssetIndexes: [0, 1]
+                        },
+                        {
+                            navLabel: "AI workflow",
+                            kicker: "03 / AI PRODUCTION",
+                            title: "From script to final edit",
+                            paragraphs: [
+                                "I handled the project independently, from scriptwriting to final delivery. The workflow moved from defining the story, to preparing visual references, generating scenes, and assembling the final edit.",
+                                "Some AI-generated scenes had visual inconsistencies. I corrected selected issues during editing to improve the final presentation."
+                            ],
+                            steps: [
+                                { name: "Scriptwriting", tool: "Gemini", detail: "Developed the promotional script and narrative." },
+                                { name: "Character & image creation", tool: "Nano Banana", detail: "Prepared character references and visual assets." },
+                                { name: "AI video generation", tool: "Google Flow", detail: "Generated animated scenes for the advertisement." },
+                                { name: "Editing & delivery", tool: "CapCut", detail: "Assembled scenes and corrected selected inconsistencies." }
+                            ],
+                            subhead: "Behind the scenes",
+                            mediaAssetIndexes: [2, 3, 4]
+                        },
+                        {
+                            navLabel: "Final video",
+                            kicker: "04 / FINAL VIDEO",
+                            title: "A one-minute app advertisement",
+                            paragraphs: [
+                                "The final deliverable was a one-minute 3D animated advertisement designed to promote the OlamaX app.",
+                                "The video introduced several app services through a short, character-led advertisement."
+                            ],
+                            bullets: ["Buying and selling cryptocurrency", "Transferring cryptocurrency", "Purchasing airtime", "Other app services"],
+                            finalVideoNote: "The main preview panel is reserved for the complete one-minute video. Add the final Vimeo ID or MP4 URL to this project's configuration when the hosted video is ready."
+                        },
+                        {
+                            navLabel: "Outcome",
+                            kicker: "05 / OUTCOME & CREDITS",
+                            title: "Delivered and approved",
+                            paragraphs: [
+                                "The video was completed within 1–2 days and approved by the client immediately after delivery. OlamaX subsequently published the advertisement across its social media platforms.",
+                                "The project demonstrates my ability to develop a promotional concept, create AI-generated animation, and deliver a complete advertising video within a short production timeline."
+                            ],
+                            credits: [
+                                { label: "Client", value: "OlamaX" },
+                                { label: "Services", value: "Scriptwriting, AI video creation, video editing, and final delivery" },
+                                { label: "Tools", value: "Gemini, Nano Banana, Google Flow, and CapCut" },
+                                { label: "Deliverable", value: "One-minute AI-generated 3D animated advertisement" }
+                            ]
+                        }
+                    ]
+                }
             },
             {
                 id: "proj-01-vertical", title: "Cyberpunk Beverage", brand: "Aura Energy", category: "AI UGC Ad", orientation: "vertical", vimeoId: "", vimeoHash: "", thumbnail: "https://images.unsplash.com/photo-1542382257-80dedb725088?q=80&w=800&auto=format&fit=crop",
@@ -3556,6 +3774,7 @@
             slide.dataset.vimeoId = project.vimeoId || "";
             slide.dataset.vimeoHash = project.vimeoHash || "";
             slide.dataset.orientation = project.orientation || "horizontal";
+            slide.dataset.cardRatio = project.cardAspectRatio || ((project.orientation || "horizontal") === "horizontal" ? "16:9" : "9:16");
 
             const card = document.createElement("article");
             card.className = "vertical-work-card";
@@ -3708,7 +3927,7 @@
                 effect: "coverflow",
                 slidesPerView: "auto",
                 centeredSlides: true,
-                initialSlide: Math.min(1, Math.max(0, visibleWorkProjects.length - 1)),
+                initialSlide: visibleWorkProjects.some(project => project.featured) ? visibleWorkProjects.findIndex(project => project.featured) : Math.min(1, Math.max(0, visibleWorkProjects.length - 1)),
                 slideToClickedSlide: true,
                 grabCursor: true,
                 loop: false,
@@ -3812,55 +4031,200 @@
             document.getElementById('modal-video-col').innerHTML = ''; // Stop and remove modal video on close
         }
 
+        let caseStudyChapterObserver = null;
+
+        function escapeCaseStudyHTML(value) {
+            return String(value ?? "").replace(/[&<>\"']/g, (char) => ({
+                "&": "&amp;", "<": "&lt;", ">": "&gt;", "\"": "&quot;", "'": "&#39;"
+            }[char]));
+        }
+
+        function renderCaseStudyAsset(asset, index) {
+            const title = escapeCaseStudyHTML(asset.title || `Production asset ${index + 1}`);
+            const caption = escapeCaseStudyHTML(asset.caption || "Supporting project visual.");
+            if (asset.src) {
+                return `<figure class="case-study-asset"><img src="${escapeCaseStudyHTML(asset.src)}" alt="${title}" loading="lazy" decoding="async"><figcaption><strong>${title}</strong><span>${caption}</span></figcaption></figure>`;
+            }
+            return `<figure class="case-study-asset case-study-asset--placeholder"><div class="case-study-asset-art" aria-hidden="true"><span class="case-study-asset-frame"></span><span class="case-study-asset-plus">+</span></div><figcaption><strong>${title}</strong><span>${caption}</span><small>Media placeholder</small></figcaption></figure>`;
+        }
+
+        function renderCaseStudyChapter(chapter, index, project) {
+            const kicker = escapeCaseStudyHTML(chapter.kicker || `${String(index + 1).padStart(2, "0")} / PROJECT STORY`);
+            const title = escapeCaseStudyHTML(chapter.title || "Project chapter");
+            const paragraphs = (chapter.paragraphs || []).map(text => `<p>${escapeCaseStudyHTML(text)}</p>`).join("");
+            const facts = chapter.facts?.length ? `<div class="case-study-facts">${chapter.facts.map(fact => `<div class="case-study-fact"><span>${escapeCaseStudyHTML(fact.label)}</span><strong>${escapeCaseStudyHTML(fact.value)}</strong></div>`).join("")}</div>` : "";
+            const bullets = chapter.bullets?.length ? `<ul class="case-study-feature-list">${chapter.bullets.map(item => `<li><span aria-hidden="true">✓</span>${escapeCaseStudyHTML(item)}</li>`).join("")}</ul>` : "";
+            const subparagraphs = (chapter.subparagraphs || []).map(text => `<p>${escapeCaseStudyHTML(text)}</p>`).join("");
+            const subhead = chapter.subhead ? `<h4 class="case-study-subhead">${escapeCaseStudyHTML(chapter.subhead)}</h4>` : "";
+            const assets = (chapter.mediaAssetIndexes || []).map(assetIndex => {
+                const asset = project.caseStudy.mediaAssets?.[assetIndex];
+                return asset ? renderCaseStudyAsset(asset, assetIndex) : "";
+            }).join("");
+            const assetGrid = assets ? `<div class="case-study-assets-grid case-study-assets-grid--${(chapter.mediaAssetIndexes || []).length > 2 ? "three" : "two"}">${assets}</div>` : "";
+            const steps = chapter.steps?.length ? `<div class="case-study-workflow">${chapter.steps.map((step, stepIndex) => `<div class="case-study-workflow-step"><span class="case-study-workflow-num">${String(stepIndex + 1).padStart(2, "0")}</span><div><div class="case-study-workflow-title">${escapeCaseStudyHTML(step.name)}</div><div class="case-study-workflow-tool">${escapeCaseStudyHTML(step.tool)}</div><p>${escapeCaseStudyHTML(step.detail)}</p></div></div>`).join("")}</div>` : "";
+            const finalVideoReady = Boolean(project.vimeoId || project.caseStudy?.finalVideoVimeoId || project.caseStudy?.finalVideoMp4Url);
+            const videoNote = chapter.finalVideoNote && !finalVideoReady ? `<div class="case-study-video-note"><div class="case-study-video-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><polygon points="8 5 19 12 8 19 8 5"/><circle cx="12" cy="12" r="10"/></svg></div><div><strong>Full one-minute video</strong><p>${escapeCaseStudyHTML(chapter.finalVideoNote)}</p></div></div>` : "";
+            const credits = chapter.credits?.length ? `<div class="case-study-credits">${chapter.credits.map(credit => `<div class="case-study-credit"><span>${escapeCaseStudyHTML(credit.label)}</span><p>${escapeCaseStudyHTML(credit.value)}</p></div>`).join("")}</div>` : "";
+
+            return `<article class="case-study-chapter" id="case-study-chapter-${index}" data-case-chapter="${index}" aria-labelledby="case-study-chapter-title-${index}">
+                <div class="case-study-chapter-head"><span class="case-study-chapter-kicker">${kicker}</span><span class="case-study-chapter-index">${String(index + 1).padStart(2, "0")}</span></div>
+                <h3 id="case-study-chapter-title-${index}">${title}</h3>
+                <div class="case-study-chapter-copy">${paragraphs}</div>
+                ${facts}${bullets}${subhead}${subparagraphs}${steps}${assetGrid}${videoNote}${credits}
+            </article>`;
+        }
+
+        function renderCaseStudyStory(project) {
+            const caseStudy = project.caseStudy || {};
+            const chapters = caseStudy.chapters || [];
+            const duration = escapeCaseStudyHTML(caseStudy.duration || "—");
+            const timeline = escapeCaseStudyHTML(caseStudy.productionTimeline || "—");
+            const role = escapeCaseStudyHTML(caseStudy.role || "—");
+            const nav = chapters.map((chapter, index) => `<button type="button" class="case-study-chapter-tab${index === 0 ? " is-active" : ""}" data-case-chapter-target="${index}" aria-controls="case-study-chapter-${index}" aria-current="${index === 0 ? "step" : "false"}"><span>${String(index + 1).padStart(2, "0")}</span>${escapeCaseStudyHTML(chapter.navLabel || chapter.title)}</button>`).join("");
+            const chapterMarkup = chapters.map((chapter, index) => renderCaseStudyChapter(chapter, index, project)).join("");
+            return `<div class="case-study-reader-intro">
+                <div class="case-study-reader-label"><span class="case-study-reader-dot"></span> CASE STUDY / OLAMAX</div>
+                <p>From first concept to final frame, explore how the advertisement came together.</p>
+            </div>
+            <div class="case-study-quickfacts" aria-label="Project summary">
+                <div><span>VIDEO LENGTH</span><strong>${duration}</strong></div>
+                <div><span>PRODUCTION TIME</span><strong>${timeline}</strong></div>
+                <div><span>MY ROLE</span><strong>${role}</strong></div>
+            </div>
+            <div class="case-study-reading-progress" aria-live="polite"><div class="case-study-reading-progress-top"><span>THE PROJECT STORY</span><strong id="case-study-progress-label">01 / ${String(chapters.length).padStart(2, "0")}</strong></div><div class="case-study-progress-track"><span id="case-study-progress-fill" style="width:${chapters.length ? 100 / chapters.length : 0}%"></span></div></div>
+            <nav class="case-study-chapter-nav" aria-label="Jump to a case study chapter">${nav}</nav>
+            <div class="case-study-chapters">${chapterMarkup}</div>
+            <p class="case-study-reader-footnote">Project details supplied by the creator. Production stills and the final video can be added when ready.</p>`;
+        }
+
+        function setupCaseStudyReader() {
+            if (caseStudyChapterObserver) {
+                caseStudyChapterObserver.disconnect();
+                caseStudyChapterObserver = null;
+            }
+            const reader = document.getElementById("modal-story-reader");
+            const pane = document.getElementById("modal-content-col");
+            if (!reader || !pane || reader.classList.contains("hidden")) return;
+            const chapters = Array.from(reader.querySelectorAll("[data-case-chapter]"));
+            const tabs = Array.from(reader.querySelectorAll("[data-case-chapter-target]"));
+            const progressLabel = reader.querySelector("#case-study-progress-label");
+            const progressFill = reader.querySelector("#case-study-progress-fill");
+            const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+            function setActiveChapter(index) {
+                const safeIndex = Math.max(0, Math.min(chapters.length - 1, index));
+                tabs.forEach((tab, tabIndex) => {
+                    const active = tabIndex === safeIndex;
+                    tab.classList.toggle("is-active", active);
+                    tab.setAttribute("aria-current", active ? "step" : "false");
+                });
+                if (progressLabel) progressLabel.textContent = `${String(safeIndex + 1).padStart(2, "0")} / ${String(chapters.length).padStart(2, "0")}`;
+                if (progressFill) progressFill.style.width = `${((safeIndex + 1) / Math.max(1, chapters.length)) * 100}%`;
+            }
+
+            tabs.forEach(tab => tab.addEventListener("click", () => {
+                const index = Number(tab.dataset.caseChapterTarget);
+                const target = chapters[index];
+                if (!target) return;
+                const paneRect = pane.getBoundingClientRect();
+                const targetRect = target.getBoundingClientRect();
+                const offset = pane.scrollTop + targetRect.top - paneRect.top - 96;
+                pane.scrollTo({ top: Math.max(0, offset), behavior: reducedMotion ? "auto" : "smooth" });
+                target.classList.add("is-revealed");
+                setActiveChapter(index);
+            }));
+
+            if (reducedMotion || !("IntersectionObserver" in window)) {
+                chapters.forEach(chapter => chapter.classList.add("is-revealed"));
+                setActiveChapter(0);
+                return;
+            }
+
+            chapters[0]?.classList.add("is-revealed");
+            caseStudyChapterObserver = new IntersectionObserver(entries => {
+                entries.forEach(entry => {
+                    if (!entry.isIntersecting) return;
+                    entry.target.classList.add("is-revealed");
+                    setActiveChapter(Number(entry.target.dataset.caseChapter));
+                });
+            }, { root: pane, threshold: 0.06, rootMargin: "-5% 0px -25% 0px" });
+            chapters.forEach(chapter => caseStudyChapterObserver.observe(chapter));
+        }
+
         function updateModalContent() {
             const project = PROJECTS[currentModalIndex];
-            const isVertical = project.orientation === 'vertical';
+            const caseStudy = project.caseStudy || {};
+            const isVertical = project.orientation === 'vertical' && project.cardAspectRatio !== '16:9';
+            const hasStory = Array.isArray(caseStudy.chapters) && caseStudy.chapters.length > 0;
+            const modalPanel = modal.querySelector(".modal-panel");
+            const contentPane = document.getElementById("modal-content-col");
+            if (modalPanel) modalPanel.classList.toggle("modal-story-mode", hasStory);
+            if (caseStudyChapterObserver) { caseStudyChapterObserver.disconnect(); caseStudyChapterObserver = null; }
+            if (contentPane) contentPane.scrollTop = 0;
 
             const vidCol = document.getElementById('modal-video-col');
             vidCol.className = `relative bg-black flex items-center justify-center border-b md:border-b-0 md:border-r border-white/10 w-full ${isVertical ? 'md:w-5/12 aspect-[9/16] md:aspect-auto' : 'md:w-7/12 aspect-video md:aspect-auto'}`;
 
-            if (project.vimeoId) {
+            const modalVimeoId = project.vimeoId || caseStudy.finalVideoVimeoId || "";
+            if (modalVimeoId) {
                 const hashParam = project.vimeoHash ? `&h=${project.vimeoHash}` : '';
-                vidCol.innerHTML = `<iframe title="${String(project.title || "Project video").replace(/[&<>"]/g, "")}" loading="eager" src="https://player.vimeo.com/video/${project.vimeoId}?title=0&byline=0&portrait=0&badge=0&dnt=1&playsinline=1&autoplay=1${hashParam}" class="absolute inset-0 w-full h-full" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>`;
+                vidCol.innerHTML = `<iframe title="${String(project.title || "Project video").replace(/[&<>\"]/g, "").slice(0, 160)}" loading="eager" src="https://player.vimeo.com/video/${encodeURIComponent(modalVimeoId)}?title=0&byline=0&portrait=0&badge=0&dnt=1&playsinline=1&autoplay=1&muted=1&loop=1&autopause=0${hashParam}" class="absolute inset-0 w-full h-full" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>`;
+            } else if (caseStudy.finalVideoMp4Url) {
+                const mp4Url = escapeCaseStudyHTML(caseStudy.finalVideoMp4Url);
+                const videoPoster = escapeCaseStudyHTML(project.thumbnail || "");
+                vidCol.innerHTML = `<video class="absolute inset-0 w-full h-full object-contain bg-black" controls playsinline preload="metadata" poster="${videoPoster}"><source src="${mp4Url}" type="video/mp4">Your browser does not support embedded video.</video>`;
+            } else if (project.id === "proj-olamax-vertical") {
+                const poster = escapeCaseStudyHTML(project.thumbnail || "/hero-poster.jpg");
+                const title = escapeCaseStudyHTML(project.title || "OlamaX project");
+                vidCol.innerHTML = `<div class="case-study-video-placeholder absolute inset-0"><img src="${poster}" alt="${title} preview" loading="eager" decoding="async"><div class="case-study-video-placeholder-shade"></div><div class="case-study-video-placeholder-caption"><span>OLAMAX / AI 3D ADVERTISEMENT</span><strong>One-minute project film</strong><small>16:9 preview · add the hosted project video URL when ready</small></div></div>`;
             } else {
-                vidCol.innerHTML = `
-                    <div class="absolute inset-0 w-full h-full flex flex-col items-center justify-center bg-gray-900 text-white">
-                        <img src="${project.thumbnail}" alt="${project.title}" class="absolute inset-0 w-full h-full object-cover opacity-30" />
-                        <div class="relative z-10 flex flex-col items-center">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mb-4 text-white/50"><polygon points="6 3 20 12 6 21 6 3"></polygon></svg>
-                            <p class="text-sm font-medium tracking-wider text-white/70 uppercase">Video Pending</p>
-                        </div>
-                    </div>
-                `;
+                const poster = escapeCaseStudyHTML(project.thumbnail || "");
+                const title = escapeCaseStudyHTML(project.title || "Project video");
+                vidCol.innerHTML = `<div class="absolute inset-0 w-full h-full flex flex-col items-center justify-center bg-gray-900 text-white"><img src="${poster}" alt="${title}" class="absolute inset-0 w-full h-full object-cover opacity-30" loading="lazy" /><div class="relative z-10 flex flex-col items-center"><svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mb-4 text-white/50"><polygon points="6 3 20 12 6 21 6 3"></polygon></svg><p class="text-sm font-medium tracking-wider text-white/70 uppercase">Video Preview</p></div></div>`;
             }
 
-            document.getElementById('modal-category').textContent = project.category;
-            document.getElementById('modal-brand').textContent = project.brand;
-            document.getElementById('modal-title').textContent = project.title;
-            document.getElementById('modal-overview').textContent = project.caseStudy.overview || '';
+            document.getElementById('modal-category').textContent = project.category || "Project";
+            document.getElementById('modal-brand').textContent = project.brand || "";
+            document.getElementById('modal-title').textContent = caseStudy.caseStudyTitle || project.title || "Untitled project";
+            const overview = document.getElementById('modal-overview');
+            overview.textContent = caseStudy.overview || '';
+            const storyReader = document.getElementById("modal-story-reader");
+            const genericDetails = document.getElementById("modal-generic-details");
 
-            toggleSection('modal-challenge-section', 'modal-challenge', project.caseStudy.challenge);
-            toggleSection('modal-approach-section', 'modal-approach', project.caseStudy.approach);
+            if (hasStory) {
+                overview.classList.add("hidden");
+                storyReader.innerHTML = renderCaseStudyStory(project);
+                storyReader.classList.remove("hidden");
+                genericDetails.classList.add("hidden");
+                requestAnimationFrame(setupCaseStudyReader);
+            } else {
+                overview.classList.remove("hidden");
+                storyReader.classList.add("hidden");
+                storyReader.replaceChildren();
+                genericDetails.classList.remove("hidden");
 
-            const hasTools = project.caseStudy.tools && project.caseStudy.tools.length > 0;
-            const hasDeliverables = project.caseStudy.deliverables && project.caseStudy.deliverables.length > 0;
+                toggleSection('modal-challenge-section', 'modal-challenge', caseStudy.challenge);
+                toggleSection('modal-approach-section', 'modal-approach', caseStudy.approach);
 
-            document.getElementById('modal-tools-deliverables').style.display = (hasTools || hasDeliverables) ? 'grid' : 'none';
-            if (hasTools) {
-                document.getElementById('modal-tools-section').style.display = 'block';
-                document.getElementById('modal-tools').innerHTML = project.caseStudy.tools.map(t => `<span class="px-2.5 py-1 rounded-md text-xs font-medium bg-white/5 text-[var(--text-muted)] border border-white/10">${t}</span>`).join('');
-            } else document.getElementById('modal-tools-section').style.display = 'none';
+                const hasTools = caseStudy.tools && caseStudy.tools.length > 0;
+                const hasDeliverables = caseStudy.deliverables && caseStudy.deliverables.length > 0;
+                document.getElementById('modal-tools-deliverables').style.display = (hasTools || hasDeliverables) ? 'grid' : 'none';
+                if (hasTools) {
+                    document.getElementById('modal-tools-section').style.display = 'block';
+                    document.getElementById('modal-tools').innerHTML = caseStudy.tools.map(t => `<span class="px-2.5 py-1 rounded-md text-xs font-medium bg-white/5 text-[var(--text-muted)] border border-white/10">${escapeCaseStudyHTML(t)}</span>`).join('');
+                } else document.getElementById('modal-tools-section').style.display = 'none';
 
-            if (hasDeliverables) {
-                document.getElementById('modal-deliverables-section').style.display = 'block';
-                document.getElementById('modal-deliverables').innerHTML = project.caseStudy.deliverables.map(d => `<li class="text-sm text-[var(--text-muted)] flex items-center gap-2"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-[var(--brand-light)]"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg> ${d}</li>`).join('');
-            } else document.getElementById('modal-deliverables-section').style.display = 'none';
+                if (hasDeliverables) {
+                    document.getElementById('modal-deliverables-section').style.display = 'block';
+                    document.getElementById('modal-deliverables').innerHTML = caseStudy.deliverables.map(d => `<li class="text-sm text-[var(--text-muted)] flex items-center gap-2"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-[var(--brand-light)]"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg> ${escapeCaseStudyHTML(d)}</li>`).join('');
+                } else document.getElementById('modal-deliverables-section').style.display = 'none';
 
-            const hasDuration = !!project.caseStudy.duration;
-            const hasResult = !!project.caseStudy.result;
-            document.getElementById('modal-duration-result').style.display = (hasDuration || hasResult) ? 'flex' : 'none';
-            toggleSection('modal-duration-section', 'modal-duration', project.caseStudy.duration);
-            toggleSection('modal-result-section', 'modal-result', project.caseStudy.result);
+                const hasDuration = !!caseStudy.duration;
+                const hasResult = !!caseStudy.result;
+                document.getElementById('modal-duration-result').style.display = (hasDuration || hasResult) ? 'flex' : 'none';
+                toggleSection('modal-duration-section', 'modal-duration', caseStudy.duration);
+                toggleSection('modal-result-section', 'modal-result', caseStudy.result);
+            }
         }
 
         function toggleSection(sectionId, textId, content) {
