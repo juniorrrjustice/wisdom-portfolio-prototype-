@@ -689,7 +689,49 @@
 
         .vertical-work-media iframe {
             z-index: 2;
+            /* Keep iframe gestures from hijacking carousel swipes. A tap on the media opens its case study,
+               where the full Vimeo player controls (including sound) are available. */
             pointer-events: none;
+        }
+
+        .vertical-work-media[data-open-case-study="true"] {
+            cursor: pointer;
+            outline-offset: 4px;
+        }
+        .vertical-work-media[data-open-case-study="true"]:focus-visible {
+            outline: 2px solid #65B6FF;
+        }
+        .vertical-work-watch-hint {
+            position: absolute;
+            right: .7rem;
+            bottom: .7rem;
+            z-index: 6;
+            display: inline-flex;
+            align-items: center;
+            gap: .35rem;
+            padding: .42rem .62rem;
+            border: 1px solid rgba(255,255,255,.18);
+            border-radius: 999px;
+            background: rgba(3,8,18,.72);
+            color: #EDF6FF;
+            box-shadow: 0 5px 18px rgba(0,0,0,.18);
+            font-size: .59rem;
+            font-weight: 800;
+            letter-spacing: .045em;
+            opacity: 0;
+            transform: translateY(4px);
+            transition: opacity .2s ease, transform .2s ease;
+            pointer-events: none;
+            -webkit-backdrop-filter: blur(8px);
+            backdrop-filter: blur(8px);
+        }
+        .vertical-work-media[data-open-case-study="true"]:hover .vertical-work-watch-hint,
+        .vertical-work-media[data-open-case-study="true"]:focus-visible .vertical-work-watch-hint {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        @media (hover: none) {
+            .vertical-work-watch-hint { opacity: .95; transform: none; }
         }
 
         .vertical-work-poster {
@@ -2562,7 +2604,7 @@
         .case-study-chapter-tab.is-active span { color:#c4b5fd; }
         .case-study-chapter-tab:focus-visible { outline:2px solid #a78bfa; outline-offset:3px; }
         .case-study-chapters { display:flex; flex-direction:column; gap:.95rem; }
-        .case-study-chapter { position:relative; min-width:0; padding:1.15rem 1.05rem 1.2rem; border:1px solid rgba(255,255,255,.075); border-radius:18px; background:linear-gradient(140deg,rgba(17,24,42,.8),rgba(8,13,24,.72)); box-shadow:0 12px 28px rgba(0,0,0,.12); opacity:.32; filter:blur(6px); transform:translateY(13px); transition:opacity .65s ease,filter .65s ease,transform .65s cubic-bezier(.2,.7,.2,1),border-color .25s ease; scroll-margin-top:100px; }
+        .case-study-chapter { position:relative; min-width:0; padding:1.15rem 1.05rem 1.2rem; border:1px solid rgba(255,255,255,.075); border-radius:18px; background:linear-gradient(140deg,rgba(17,24,42,.8),rgba(8,13,24,.72)); box-shadow:0 12px 28px rgba(0,0,0,.12); opacity:.82; filter:none; transform:translateY(8px); transition:opacity .32s ease,transform .32s ease,border-color .25s ease; scroll-margin-top:100px; }
         .case-study-chapter.is-revealed { opacity:1; filter:blur(0); transform:translateY(0); }
         .case-study-chapter.is-revealed:hover { border-color:rgba(112,56,245,.24); }
         .case-study-chapter-head { display:flex; align-items:center; justify-content:space-between; gap:.7rem; margin-bottom:.7rem; }
@@ -2635,6 +2677,87 @@
             .case-study-reader,.case-study-chapter,.case-study-progress-track span,.case-study-chapter-tab { animation:none!important; transition:none!important; }
             .case-study-chapter { opacity:1; filter:none; transform:none; }
         }
+    </style>
+
+    <style id="reference-blue-background-and-carousel-refinement">
+      /* The supplied reference: midnight black with a restrained indigo-blue wash from the left. */
+      :root {
+        --reference-blue: #0033FF;
+        --reference-night: #03050B;
+      }
+      html, body {
+        background-color: var(--reference-night) !important;
+        background-image: linear-gradient(108deg, #0A1545 0%, #07102C 23%, #050A1A 48%, #03050B 82%) !important;
+        background-attachment: fixed;
+      }
+      #main-background-wrapper > section,
+      #main-background-wrapper > footer {
+        background-color: #03050B !important;
+        background-image: linear-gradient(108deg, #0A1545 0%, #07102C 23%, #050A1A 48%, #03050B 82%) !important;
+      }
+      /* Keep the established moving #0033FF glow layers, but remove the previous solid violet section fill. */
+      #why-work-with-me {
+        background-color: #03050B !important;
+        background-image: linear-gradient(108deg, #0A1545 0%, #07102C 23%, #050A1A 48%, #03050B 82%) !important;
+        border-top-color: rgba(96,165,250,.16) !important;
+        border-bottom-color: rgba(96,165,250,.12) !important;
+      }
+      #why-work-with-me > .bg-glow {
+        background: var(--reference-blue) !important;
+        opacity: .12 !important;
+        filter: blur(120px) !important;
+      }
+      /* The grid remains static and faint. Only the moving light-line overlays are removed. */
+      .pulse-v, .pulse-h { display: none !important; }
+
+      /* Selected Work: lower GPU load and make swipe / button navigation respond faster. */
+      .vertical-work-slide {
+        filter: none !important;
+        transition: opacity 220ms ease !important;
+      }
+      .vertical-work-slide:not(.swiper-slide-active) { opacity: .62 !important; }
+      .vertical-work-slide.swiper-slide-active { opacity: 1 !important; filter: none !important; }
+      .vertical-work-media.has-video-source::after { display: none !important; }
+      .vertical-work-media.has-video-source .vertical-work-poster,
+      .vertical-work-media.has-video-source .vertical-work-play { display: none !important; }
+
+      /* High-contrast solid blue Case Study links, not muted blue-violet gradients. */
+      .vertical-work-case-study {
+        color: #FFFFFF !important;
+        text-decoration: none !important;
+        background: #2563EB !important;
+        border-color: #3B82F6 !important;
+        box-shadow: 0 7px 20px rgba(37,99,235,.24) !important;
+        transition: background-color .16s ease, box-shadow .16s ease, transform .16s ease !important;
+      }
+      .vertical-work-case-study:hover,
+      .vertical-work-case-study:focus-visible {
+        background: #1D4ED8 !important;
+        border-color: #60A5FA !important;
+        color: #FFFFFF !important;
+        box-shadow: 0 0 0 3px rgba(59,130,246,.18), 0 9px 24px rgba(37,99,235,.30) !important;
+      }
+      .vertical-work-case-study:focus-visible { outline: 2px solid #93C5FD !important; outline-offset: 3px; }
+      /* Case-study chapters reveal by a gentle fade/lift only; no blur while reading or scrolling. */
+      .case-study-chapter {
+        opacity: .82 !important;
+        filter: none !important;
+        transform: translateY(8px) !important;
+        transition: opacity .32s ease, transform .32s ease, border-color .22s ease !important;
+      }
+      .case-study-chapter.is-revealed { opacity: 1 !important; filter: none !important; transform: translateY(0) !important; }
+
+      @media (max-width: 767px) {
+        html, body { background-attachment: scroll; }
+        #main-background-wrapper > section,
+        #main-background-wrapper > footer { background-attachment: scroll; }
+        .vertical-work-slide { transition: opacity 170ms ease !important; }
+        .vertical-work-case-study { min-height: 2.45rem; padding: .56rem .9rem; }
+      }
+      @media (prefers-reduced-motion: reduce) {
+        .vertical-work-slide, .vertical-work-case-study { transition: none !important; }
+        .case-study-chapter { opacity: 1 !important; transform: none !important; }
+      }
     </style>
 
 </head>
@@ -3603,20 +3726,11 @@
         /* ============================================================================
            INJECT THE "ALIVE" GRID INTO SELECTED SECTIONS
            ============================================================================ */
-        document.querySelectorAll('.data-alive-grid').forEach((el, index) => {
-            // Generate random delays for organic pulse movement
-            const delay1 = Math.random() * 4;
-            const delay2 = Math.random() * 4;
-
+        document.querySelectorAll('.data-alive-grid').forEach((el) => {
+            // Keep the faint static grid, but remove the animated traveling line pulses.
             el.innerHTML = `
                 <div class="grid-alive-wrapper">
                     <div class="grid-alive-base"></div>
-                    <!-- Vertical Pulses -->
-                    <div class="pulse-v" style="left: 20%; animation-duration: 8s;"></div>
-                    <div class="pulse-v" style="left: 70%; animation-duration: 11s; animation-delay: ${delay1}s;"></div>
-                    <!-- Horizontal Pulses -->
-                    <div class="pulse-h" style="top: 30%; animation-duration: 10s;"></div>
-                    <div class="pulse-h" style="top: 80%; animation-duration: 14s; animation-delay: ${delay2}s;"></div>
                 </div>
             `;
         });
@@ -3753,7 +3867,7 @@
 
         /* ============================================================================
            SELECTED WORK CAROUSEL
-           Filter by aspect ratio; only the active Vimeo project is embedded.
+           Filter by aspect ratio; lazily embed each Vimeo project on first visit and keep it playing when the carousel advances.
            ============================================================================ */
         const verticalWorkRoot = document.getElementById("vertical-work-swiper");
         const verticalWorkWrapper = document.getElementById("vertical-work-wrapper");
@@ -3762,6 +3876,7 @@
         const selectedWorkNext = document.getElementById("selected-work-next");
         const selectedWorkTabs = Array.from(document.querySelectorAll("[data-work-orientation]"));
         let verticalWorkSwiper = null;
+        let pendingSelectedWorkRestore = null;
         let activeWorkOrientation = "vertical";
         let visibleWorkProjects = [];
         // Keep the first screen light: wait until the carousel approaches the viewport before creating its player.
@@ -3785,21 +3900,41 @@
             const media = document.createElement("div");
             media.className = "vertical-work-media";
 
-            const poster = document.createElement("img");
-            poster.src = project.thumbnail || "/hero-poster.jpg";
-            poster.alt = `${project.title} video preview`;
-            poster.loading = index > 1 ? "lazy" : "eager";
-            poster.decoding = "async";
-            poster.className = "vertical-work-poster";
-            media.appendChild(poster);
+            const hasAutoplayVideo = Boolean(project.vimeoId);
+            if (hasAutoplayVideo) {
+                media.classList.add("has-video-source");
+                media.dataset.openCaseStudy = "true";
+                media.dataset.projectId = project.id;
+                media.dataset.caseStudyHref = `case-study.html?project=${encodeURIComponent(project.id)}`;
+                media.setAttribute("role", "link");
+                media.setAttribute("tabindex", "0");
+                media.setAttribute("aria-label", `Open ${project.title} case study to watch with sound`);
+                const watchHint = document.createElement("span");
+                watchHint.className = "vertical-work-watch-hint";
+                watchHint.textContent = "Watch with sound ↗";
+                watchHint.setAttribute("aria-hidden", "true");
+                media.appendChild(watchHint);
+            }
 
-            const playButton = document.createElement("button");
-            playButton.type = "button";
-            playButton.className = "vertical-work-play";
-            playButton.dataset.projectId = project.id;
-            playButton.setAttribute("aria-label", `Play or view ${project.title}`);
-            playButton.innerHTML = '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M7 4.8c0-.8.9-1.3 1.6-.9l10.3 7.1c.6.4.6 1.3 0 1.8L8.6 19.9c-.7.5-1.6 0-1.6-.9V4.8Z"/></svg>';
-            media.appendChild(playButton);
+            // Cards with a hosted Vimeo source autoplay silently with no play-button overlay.
+            // Tapping/clicking their media opens a player page with usable sound controls.
+            if (!hasAutoplayVideo) {
+                const poster = document.createElement("img");
+                poster.src = project.thumbnail || "/hero-poster.jpg";
+                poster.alt = `${project.title} preview`;
+                poster.loading = index > 1 ? "lazy" : "eager";
+                poster.decoding = "async";
+                poster.className = "vertical-work-poster";
+                media.appendChild(poster);
+
+                const playButton = document.createElement("button");
+                playButton.type = "button";
+                playButton.className = "vertical-work-play";
+                playButton.dataset.projectId = project.id;
+                playButton.setAttribute("aria-label", `Open preview for ${project.title}`);
+                playButton.innerHTML = '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M7 4.8c0-.8.9-1.3 1.6-.9l10.3 7.1c.6.4.6 1.3 0 1.8L8.6 19.9c-.7.5-1.6 0-1.6-.9V4.8Z"/></svg>';
+                media.appendChild(playButton);
+            }
             mediaSlot.appendChild(media);
 
             const caption = document.createElement("div");
@@ -3818,11 +3953,26 @@
             progressFill.style.width = `${Math.max(12, ((index + 1) / Math.max(1, count)) * 100)}%`;
             progress.appendChild(progressFill);
 
-            const caseStudyButton = document.createElement("button");
-            caseStudyButton.type = "button";
-            caseStudyButton.className = "vertical-work-case-study";
+            const caseStudyButton = document.createElement("a");
+            caseStudyButton.className = "vertical-work-case-study swiper-no-swiping";
+            caseStudyButton.href = `case-study.html?project=${encodeURIComponent(project.id)}`;
+            // Stay in the same tab so the case-study Back control returns to this exact browsing context.
             caseStudyButton.dataset.projectId = project.id;
-            caseStudyButton.setAttribute("aria-label", `View case study for ${project.title || "this project"}`);
+            caseStudyButton.setAttribute("aria-label", `Read the case study for ${project.title || "this project"}`);
+            caseStudyButton.addEventListener("click", () => {
+                try {
+                    const activeSlide = verticalWorkRoot && verticalWorkRoot.querySelector(".swiper-slide-active");
+                    sessionStorage.setItem("wisdomSelectedWorkReturnV1", JSON.stringify({
+                        pathname: window.location.pathname,
+                        returnUrl: window.location.href,
+                        scrollY: window.scrollY,
+                        activeProjectId: activeSlide?.dataset.projectId || project.id,
+                        orientation: activeWorkOrientation,
+                        targetProjectId: project.id,
+                        savedAt: Date.now()
+                    }));
+                } catch (_) { /* Navigation should still work when session storage is unavailable. */ }
+            });
             caseStudyButton.innerHTML = 'Case Study <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7"/><path d="M7 7h10v10"/></svg>';
 
             caption.append(category, title, progress, caseStudyButton);
@@ -3844,13 +3994,12 @@
 
                 if (!media) return;
                 if (!isActive) {
-                    if (existingFrame) existingFrame.remove();
-                    media.classList.remove('has-video-playing');
-                    if (poster) { poster.hidden = false; poster.style.opacity = ''; }
+                    // Important: do not remove/pause previously activated players when the carousel moves.
+                    // Vimeo embeds use autopause=0, so every visited project can keep looping in its own card.
                     return;
                 }
 
-                // Show the thumbnail immediately and only request Vimeo when Selected Work is near the screen.
+                // Defer first-time player creation until Selected Work is near the viewport.
                 if (!selectedWorkVideoUnlocked) return;
                 if (!vimeoId || existingFrame) return;
                 const vimeoHash = slide.dataset.vimeoHash || "";
@@ -3901,6 +4050,14 @@
 
         function setSelectedWorkOrientation() {
             // This showcase is intentionally vertical-only (9:16); no horizontal mode is exposed.
+            // Re-clicking the active tab must not rebuild the carousel and interrupt existing video players.
+            if (activeWorkOrientation === "vertical" && verticalWorkSwiper) {
+                selectedWorkTabs.forEach((tab) => {
+                    tab.classList.toggle("is-active", tab.dataset.workOrientation === "vertical");
+                    tab.setAttribute("aria-pressed", tab.dataset.workOrientation === "vertical" ? "true" : "false");
+                });
+                return;
+            }
             activeWorkOrientation = "vertical";
             selectedWorkTabs.forEach((tab) => {
                 const active = tab.dataset.workOrientation === "vertical";
@@ -3928,17 +4085,25 @@
                 slidesPerView: "auto",
                 centeredSlides: true,
                 initialSlide: visibleWorkProjects.some(project => project.featured) ? visibleWorkProjects.findIndex(project => project.featured) : Math.min(1, Math.max(0, visibleWorkProjects.length - 1)),
-                slideToClickedSlide: true,
+                slideToClickedSlide: false,
                 grabCursor: true,
                 loop: false,
-                speed: 650,
-                spaceBetween: -54,
+                speed: 340,
+                spaceBetween: -34,
                 watchSlidesProgress: true,
+                touchRatio: 1.15,
+                threshold: 4,
+                longSwipesMs: 75,
+                longSwipesRatio: 0.13,
+                resistanceRatio: 0.72,
+                preventClicks: false,
+                preventClicksPropagation: false,
+                noSwipingSelector: "a, button",
                 coverflowEffect: {
                     rotate: 0,
                     stretch: 0,
-                    depth: 135,
-                    modifier: 1.05,
+                    depth: 78,
+                    modifier: 0.78,
                     slideShadows: false
                 },
                 keyboard: { enabled: true, onlyInViewport: true },
@@ -3959,6 +4124,7 @@
                     }
                 }
             });
+            if (pendingSelectedWorkRestore) applySelectedWorkRestore(pendingSelectedWorkRestore);
         }
 
         if (selectedWorkPrev) selectedWorkPrev.addEventListener("click", () => verticalWorkSwiper && verticalWorkSwiper.slidePrev());
@@ -3966,15 +4132,64 @@
         selectedWorkTabs.forEach(tab => tab.addEventListener("click", () => setSelectedWorkOrientation(tab.dataset.workOrientation)));
 
         if (verticalWorkRoot) {
-            // Capture the explicit buttons before Swiper's slide-click handler runs.
+            // Hosted autoplay previews are clickable without covering the card with a play button.
+            // A short tap opens the dedicated case-study player; a swipe still navigates the carousel.
+            let videoMediaPointerStart = null;
+            verticalWorkRoot.addEventListener("pointerdown", (event) => {
+                const media = event.target.closest('.vertical-work-media[data-open-case-study="true"]');
+                if (!media || (event.pointerType === "mouse" && event.button !== 0)) {
+                    videoMediaPointerStart = null;
+                    return;
+                }
+                videoMediaPointerStart = {
+                    media,
+                    pointerId: event.pointerId,
+                    x: event.clientX,
+                    y: event.clientY,
+                    time: performance.now()
+                };
+            }, true);
+            verticalWorkRoot.addEventListener("pointerup", (event) => {
+                const start = videoMediaPointerStart;
+                videoMediaPointerStart = null;
+                if (!start || start.pointerId !== event.pointerId || !start.media.isConnected) return;
+                const releaseMedia = event.target.closest('.vertical-work-media[data-open-case-study="true"]');
+                const moved = Math.hypot(event.clientX - start.x, event.clientY - start.y);
+                const elapsed = performance.now() - start.time;
+                if (releaseMedia !== start.media || moved > 10 || elapsed > 900) return;
+                const href = start.media.dataset.caseStudyHref;
+                if (!href) return;
+                try {
+                    const activeSlide = verticalWorkRoot && verticalWorkRoot.querySelector(".swiper-slide-active");
+                    const targetSlide = start.media.closest(".vertical-work-slide");
+                    sessionStorage.setItem("wisdomSelectedWorkReturnV1", JSON.stringify({
+                        pathname: window.location.pathname,
+                        returnUrl: window.location.href,
+                        scrollY: window.scrollY,
+                        activeProjectId: activeSlide?.dataset.projectId || targetSlide?.dataset.projectId || "proj-olamax-vertical",
+                        orientation: activeWorkOrientation,
+                        targetProjectId: targetSlide?.dataset.projectId || start.media.dataset.projectId || "",
+                        savedAt: Date.now()
+                    }));
+                } catch (_) { /* History back still works if session storage is unavailable. */ }
+                window.location.href = href;
+            }, true);
+            verticalWorkRoot.addEventListener("pointercancel", () => { videoMediaPointerStart = null; }, true);
+            verticalWorkRoot.addEventListener("keydown", (event) => {
+                const media = event.target.closest('.vertical-work-media[data-open-case-study="true"]');
+                if (!media || !["Enter", " "].includes(event.key)) return;
+                event.preventDefault();
+                const href = media.dataset.caseStudyHref;
+                if (href) window.location.href = href;
+            }, true);
+
+            // Poster-only projects keep their existing preview-modal behavior.
             verticalWorkRoot.addEventListener("click", (event) => {
-                const caseStudyButton = event.target.closest(".vertical-work-case-study");
                 const playButton = event.target.closest(".vertical-work-play");
-                const trigger = caseStudyButton || playButton;
-                if (!trigger) return;
+                if (!playButton) return;
                 event.preventDefault();
                 event.stopPropagation();
-                openModal(trigger.dataset.projectId);
+                openModal(playButton.dataset.projectId);
             }, true);
         }
 
@@ -3986,6 +4201,35 @@
             }, { once: true });
         }
 
+        // Restore the user's Selected Work position after returning from a case-study page.
+        function applySelectedWorkRestore(state) {
+            if (!state) return false;
+            if (verticalWorkSwiper && Array.isArray(visibleWorkProjects)) {
+                const savedIndex = visibleWorkProjects.findIndex(item => item.id === state.activeProjectId);
+                if (savedIndex >= 0) verticalWorkSwiper.slideTo(savedIndex, 0, false);
+                requestAnimationFrame(() => requestAnimationFrame(() => window.scrollTo(0, Math.max(0, Number(state.scrollY) || 0))));
+                pendingSelectedWorkRestore = null;
+                return true;
+            }
+            pendingSelectedWorkRestore = state;
+            window.scrollTo(0, Math.max(0, Number(state.scrollY) || 0));
+            return false;
+        }
+        window.addEventListener("pageshow", (event) => {
+            let state = null;
+            try {
+                state = JSON.parse(sessionStorage.getItem("wisdomSelectedWorkReturnV1") || "null");
+            } catch (_) { state = null; }
+            if (!state || state.pathname !== window.location.pathname || Date.now() - Number(state.savedAt || 0) > 30 * 60 * 1000) return;
+            // BFCache already restores the live carousel and scroll; only clear the hand-off state.
+            if (event.persisted) {
+                try { sessionStorage.removeItem("wisdomSelectedWorkReturnV1"); } catch (_) {}
+                return;
+            }
+            try { sessionStorage.removeItem("wisdomSelectedWorkReturnV1"); } catch (_) {}
+            applySelectedWorkRestore(state);
+        });
+
         if (selectedWorkSection && 'IntersectionObserver' in window) {
             const selectedWorkWarmupObserver = new IntersectionObserver((entries, observer) => {
                 if (entries.some(entry => entry.isIntersecting)) {
@@ -3993,7 +4237,7 @@
                     observer.disconnect();
                     activateVerticalSlide(verticalWorkSwiper);
                 }
-            }, { rootMargin: '260px 0px', threshold: 0 });
+            }, { rootMargin: '420px 0px', threshold: 0 });
             selectedWorkWarmupObserver.observe(selectedWorkSection);
         } else {
             selectedWorkVideoUnlocked = true;
