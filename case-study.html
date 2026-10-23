@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#03050b">
+  <meta name="description" content="Project case studies by Wisdom Aghedo — AI video production, commercials, and visual storytelling.">
+  <title>Project Case Study | Wisdom Aghedo</title>
+  <link rel="preconnect" href="https://player.vimeo.com" crossorigin>
+  <link rel="preconnect" href="https://i.vimeocdn.com" crossorigin>
+  <style>
+    :root { color-scheme: dark; --blue:#2563EB; --blue-bright:#60A5FA; --violet:#7038F5; --text:#F8FAFC; --muted:#AAB7CC; --line:rgba(255,255,255,.09); }
+    * { box-sizing:border-box; }
+    html { scroll-behavior:smooth; scroll-padding-top:100px; background:#03050b; }
+    body { margin:0; min-width:0; overflow-x:clip; font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif; color:var(--text); background:linear-gradient(108deg,#0A1545 0%,#07102C 23%,#050A1A 48%,#03050B 82%); }
+    body::before { content:""; position:fixed; z-index:-1; inset:0; pointer-events:none; background:radial-gradient(ellipse at 8% 78%,rgba(0,51,255,.21),transparent 42%); animation:blueBreath 22s ease-in-out infinite alternate; }
+    @keyframes blueBreath { from { opacity:.48; transform:translate3d(0,5%,0) scale(.98); } to { opacity:.82; transform:translate3d(2%,-2%,0) scale(1.04); } }
+    a { color:inherit; }
+    .topbar { position:sticky; top:0; z-index:50; border-bottom:1px solid rgba(96,165,250,.17); background:rgba(3,8,20,.88); backdrop-filter:blur(18px); -webkit-backdrop-filter:blur(18px); }
+    .topbar-inner { width:min(1160px,calc(100% - 2rem)); min-height:68px; margin:auto; display:flex; align-items:center; justify-content:space-between; gap:1rem; }
+    .brand { display:flex; align-items:center; gap:.7rem; text-decoration:none; }
+    .brand-mark { display:grid; place-items:center; width:36px; height:36px; border-radius:11px; background:linear-gradient(145deg,#35A3FF,#0759DE); font-weight:900; }
+    .brand-copy { display:flex; flex-direction:column; gap:.2rem; }
+    .brand-copy strong { font-size:.76rem; letter-spacing:.06em; }
+    .brand-copy small { color:#70B8FF; font-size:.58rem; font-weight:800; letter-spacing:.12em; }
+    .back-link { display:inline-flex; align-items:center; gap:.5rem; padding:.65rem .9rem; border:1px solid rgba(96,165,250,.26); border-radius:999px; color:#dbeafe; background:rgba(37,99,235,.1); text-decoration:none; font-size:.82rem; font-weight:750; transition:background .18s ease,border-color .18s ease; }
+    .back-link:hover { background:rgba(37,99,235,.23); border-color:rgba(96,165,250,.6); }
+    main { width:min(100% - 2rem,1060px); margin:0 auto; padding:clamp(2rem,5vw,4.5rem) 0 5rem; }
+    .hero { max-width:880px; margin:0 auto 2rem; text-align:center; }
+    .eyebrow { display:inline-flex; align-items:center; gap:.55rem; margin:0 0 1rem; color:#76BDFF; font-size:.68rem; font-weight:850; letter-spacing:.18em; text-transform:uppercase; }
+    .eyebrow::before { content:""; width:7px; height:7px; border-radius:50%; background:#398DFF; box-shadow:0 0 14px rgba(57,141,255,.7); }
+    h1 { max-width:900px; margin:0 auto; font-size:clamp(2.1rem,5.3vw,4.6rem); line-height:1.04; letter-spacing:-.055em; font-weight:900; text-wrap:balance; }
+    .hero-lead { max-width:760px; margin:1.2rem auto 0; color:#b8c5d9; font-size:clamp(1rem,1.8vw,1.16rem); line-height:1.75; text-wrap:pretty; }
+    .quickfacts { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:.7rem; margin:1.65rem 0 1.75rem; }
+    .quickfact { min-width:0; padding:1rem; border:1px solid rgba(255,255,255,.09); border-radius:16px; background:rgba(10,18,39,.62); box-shadow:0 10px 28px rgba(0,0,0,.12); }
+    .quickfact span { display:block; color:#8797B1; font-size:.62rem; font-weight:850; letter-spacing:.12em; text-transform:uppercase; }
+    .quickfact strong { display:block; margin-top:.45rem; color:#f3f7ff; font-size:.88rem; line-height:1.45; overflow-wrap:anywhere; }
+    .video-frame { position:relative; overflow:hidden; aspect-ratio:16/9; border:1px solid rgba(96,165,250,.32); border-radius:clamp(16px,2.5vw,26px); background:#020409; box-shadow:0 24px 70px rgba(0,0,0,.4),0 0 35px rgba(0,51,255,.09); }
+    .video-frame iframe { position:absolute; inset:0; display:block; width:100%; height:100%; border:0; }
+    .video-frame:focus-within { outline:2px solid rgba(96,165,250,.45); outline-offset:3px; }
+    .video-frame.is-placeholder { display:grid; place-items:center; background:linear-gradient(135deg,rgba(6,18,48,.95),rgba(2,5,13,.98)); }
+    .video-frame.is-placeholder::before { content:""; position:absolute; inset:0; pointer-events:none; background:repeating-linear-gradient(0deg,transparent 0 68px,rgba(96,165,250,.035) 69px 70px),repeating-linear-gradient(90deg,transparent 0 68px,rgba(96,165,250,.035) 69px 70px); }
+    .video-placeholder-label { position:relative; z-index:1; padding:1rem; text-align:center; color:#b8c7dc; font-size:.85rem; line-height:1.6; }
+    .video-placeholder-label strong { display:block; margin-bottom:.35rem; color:#f7f9ff; font-size:1rem; }
+    .player-caption { display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:.6rem; margin:.75rem .15rem 0; color:#8292ac; font-size:.7rem; }
+    .player-caption span:first-child { color:#8fcaff; font-weight:800; letter-spacing:.1em; text-transform:uppercase; }
+    .chapter-progress { margin:2rem 0 1rem; }
+    .progress-top { display:flex; align-items:center; justify-content:space-between; gap:1rem; color:#91a0b8; font-size:.67rem; font-weight:850; letter-spacing:.13em; }
+    .progress-top strong { color:#a8cfff; font-variant-numeric:tabular-nums; }
+    .progress-track { height:3px; overflow:hidden; margin-top:.65rem; border-radius:99px; background:rgba(255,255,255,.09); }
+    .progress-track span { display:block; width:20%; height:100%; border-radius:inherit; background:linear-gradient(90deg,#2563EB,#60A5FA,#7038F5); transition:width .25s ease; }
+    .chapter-nav { position:sticky; top:68px; z-index:40; display:flex; gap:.45rem; padding:.75rem 0; margin:0 0 1.15rem; overflow-x:auto; scrollbar-width:none; background:linear-gradient(180deg,rgba(4,8,19,.96),rgba(4,8,19,.88)); border-bottom:1px solid rgba(255,255,255,.08); }
+    .chapter-nav::-webkit-scrollbar { display:none; }
+    .chapter-nav a { flex:0 0 auto; display:inline-flex; align-items:center; gap:.42rem; padding:.58rem .78rem; border:1px solid rgba(255,255,255,.09); border-radius:999px; color:#a5b2c8; background:rgba(255,255,255,.025); text-decoration:none; font-size:.72rem; font-weight:800; white-space:nowrap; transition:background .18s ease,border-color .18s ease,color .18s ease; }
+    .chapter-nav a span { color:#81bfff; font-size:.62rem; }
+    .chapter-nav a:hover,.chapter-nav a.is-active { color:#fff; border-color:rgba(96,165,250,.48); background:rgba(37,99,235,.2); }
+    .chapters { display:grid; gap:1rem; }
+    .chapter { scroll-margin-top:132px; padding:clamp(1.1rem,3vw,2rem); border:1px solid rgba(255,255,255,.085); border-radius:20px; background:linear-gradient(135deg,rgba(12,21,43,.76),rgba(4,8,19,.86)); box-shadow:0 15px 36px rgba(0,0,0,.16); opacity:.84; transform:translateY(8px); transition:opacity .35s ease,transform .35s ease,border-color .22s ease; }
+    .chapter.is-visible { opacity:1; transform:translateY(0); }
+    .chapter:hover { border-color:rgba(96,165,250,.22); }
+    .chapter-head { display:flex; align-items:center; justify-content:space-between; gap:1rem; margin-bottom:.65rem; }
+    .chapter-kicker { color:#8fc6ff; font-size:.65rem; font-weight:850; letter-spacing:.15em; line-height:1.55; }
+    .chapter-number { color:rgba(96,165,250,.25); font-size:2rem; line-height:1; font-weight:950; letter-spacing:-.07em; }
+    h2 { margin:0 0 .8rem; color:#f8fafc; font-size:clamp(1.45rem,3vw,2.1rem); line-height:1.15; letter-spacing:-.04em; }
+    h3 { margin:1.2rem 0 .45rem; color:#e9f1ff; font-size:1rem; line-height:1.35; }
+    p { color:#b5c2d6; line-height:1.82; font-size:.94rem; margin:.62rem 0 0; }
+    .highlight { color:#eef5ff; font-weight:750; }
+    .bullet-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:.6rem; list-style:none; margin:1rem 0 0; padding:0; }
+    .bullet-grid li { padding:.78rem .85rem; border:1px solid rgba(96,165,250,.13); border-radius:12px; background:rgba(37,99,235,.07); color:#d3deef; font-size:.83rem; line-height:1.55; }
+    .bullet-grid li::before { content:"✓"; margin-right:.55rem; color:#7dbbff; font-weight:900; }
+    .workflow { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:.7rem; margin-top:1rem; }
+    .workflow-step { display:grid; grid-template-columns:36px minmax(0,1fr); gap:.75rem; padding:.9rem; border:1px solid rgba(255,255,255,.075); border-radius:14px; background:rgba(255,255,255,.025); }
+    .step-num { display:grid; place-items:center; width:34px; height:34px; border:1px solid rgba(96,165,250,.25); border-radius:11px; background:rgba(37,99,235,.18); color:#d8e9ff; font-size:.68rem; font-weight:900; }
+    .workflow-step strong { color:#f4f7ff; font-size:.84rem; }
+    .workflow-step small { display:block; margin:.18rem 0 .3rem; color:#8fc6ff; font-size:.7rem; font-weight:800; }
+    .workflow-step p { margin:0; font-size:.8rem; line-height:1.65; }
+    .asset-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:.7rem; margin-top:1rem; }
+    .asset-placeholder { display:flex; flex-direction:column; justify-content:space-between; min-height:170px; padding:1rem; border:1px dashed rgba(96,165,250,.3); border-radius:15px; background:radial-gradient(ellipse at 50% 100%,rgba(0,51,255,.14),transparent 70%),rgba(255,255,255,.02); }
+    .asset-art { display:grid; place-items:center; width:38px; height:38px; border-radius:12px; border:1px solid rgba(96,165,250,.25); background:rgba(37,99,235,.12); color:#9acbff; font-size:1.35rem; }
+    .asset-placeholder strong { display:block; margin-top:1rem; color:#eaf2ff; font-size:.83rem; }
+    .asset-placeholder small { display:block; margin-top:.3rem; color:#8f9fb8; font-size:.73rem; line-height:1.55; }
+    .credits { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:.65rem; margin-top:1rem; }
+    .credit { padding:.85rem; border:1px solid rgba(255,255,255,.07); border-radius:13px; background:rgba(255,255,255,.025); }
+    .credit span { display:block; color:#8ea0ba; font-size:.62rem; font-weight:850; letter-spacing:.11em; text-transform:uppercase; }
+    .credit strong { display:block; margin-top:.35rem; color:#edf4ff; font-size:.82rem; line-height:1.6; }
+    .final-film { margin-top:clamp(2.8rem,6vw,5rem); padding-top:clamp(1.5rem,3vw,2.2rem); border-top:1px solid rgba(255,255,255,.085); }
+    .final-film-heading { max-width:720px; margin:0 0 1.2rem; }
+    .final-film-eyebrow,.more-work-eyebrow { margin:0 0 .65rem; color:#83c4ff; font-size:.64rem; font-weight:850; letter-spacing:.17em; text-transform:uppercase; }
+    .final-film-heading h2 { margin:0; }
+    .final-film-heading p:last-child { max-width:44rem; color:#94a5bf; font-size:.87rem; margin:.5rem 0 0; }
+    .final-film .video-frame { box-shadow:0 24px 70px rgba(0,0,0,.4),0 0 32px rgba(0,51,255,.11); }
+    .footer-actions { display:flex; justify-content:space-between; align-items:center; gap:1rem; flex-wrap:wrap; margin-top:1.65rem; padding-top:1.3rem; border-top:1px solid var(--line); }
+    .more-work { margin-top:2.7rem; padding-top:1.35rem; border-top:1px solid rgba(255,255,255,.06); }
+    .more-work-heading { display:flex; justify-content:space-between; align-items:end; gap:1rem; margin-bottom:1rem; }
+    .more-work-heading h2 { margin:0; font-size:clamp(1.15rem,2.4vw,1.55rem); }
+    .more-work-heading > p { max-width:22rem; margin:0; color:#7f90aa; font-size:.78rem; line-height:1.6; }
+    .more-work-grid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:.7rem; }
+    .more-work-card { display:flex; align-items:flex-start; justify-content:space-between; gap:.7rem; min-width:0; padding:.9rem; border:1px solid rgba(255,255,255,.075); border-radius:14px; background:rgba(11,20,39,.42); color:inherit; text-decoration:none; transition:border-color .2s ease,background .2s ease,transform .2s ease; }
+    .more-work-card:hover,.more-work-card:focus-visible { background:rgba(37,99,235,.08); border-color:rgba(96,165,250,.32); transform:translateY(-2px); outline:none; }
+    .more-work-card small { display:block; margin-bottom:.35rem; color:#7fbfff; font-size:.58rem; font-weight:850; letter-spacing:.12em; text-transform:uppercase; }
+    .more-work-card strong { display:block; color:#e8effb; font-size:.8rem; line-height:1.45; }
+    .more-work-card .more-work-arrow { flex:0 0 auto; color:#7092c6; font-size:1rem; transition:transform .2s ease,color .2s ease; }
+    .more-work-card:hover .more-work-arrow,.more-work-card:focus-visible .more-work-arrow { color:#a8cfff; transform:translate(2px,-2px); }
+    .button-link { display:inline-flex; justify-content:center; align-items:center; min-height:44px; padding:.75rem 1rem; border:1px solid rgba(96,165,250,.45); border-radius:11px; background:#2563EB; color:white; font-size:.83rem; font-weight:800; text-decoration:none; }
+    .button-link.secondary { background:rgba(255,255,255,.035); border-color:rgba(255,255,255,.14); color:#dce7f8; }
+    .error-state { max-width:680px; margin:4rem auto; padding:2rem; border:1px solid var(--line); border-radius:20px; background:rgba(7,12,25,.86); }
+    @media(max-width:680px) { .topbar-inner{min-height:62px;width:calc(100% - 1rem)} .brand-mark{width:32px;height:32px} .brand-copy strong{font-size:.66rem}.brand-copy small{font-size:.53rem}.back-link{font-size:.72rem;padding:.58rem .72rem} main{width:calc(100% - 1rem);padding-top:2rem}.quickfacts{grid-template-columns:repeat(2,minmax(0,1fr));gap:.5rem}.quickfact{padding:.8rem}.quickfact strong{font-size:.8rem}.chapter-nav{top:62px}.chapter{padding:1rem;border-radius:17px}.bullet-grid,.workflow,.asset-grid,.credits{grid-template-columns:minmax(0,1fr)}.asset-placeholder{min-height:135px}.player-caption{align-items:flex-start;flex-direction:column}.more-work-heading{display:block}.more-work-heading>p{margin-top:.55rem}.more-work-grid{grid-template-columns:minmax(0,1fr)}.final-film{margin-top:2.3rem} }
+    @media(prefers-reduced-motion:reduce) { html{scroll-behavior:auto} body::before{animation:none}.chapter{opacity:1;transform:none;transition:none}.progress-track span,.chapter-nav a{transition:none} }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="topbar-inner">
+      <a class="brand" href="index.html#hero-section" aria-label="Wisdom Aghedo home"><span class="brand-mark">W</span><span class="brand-copy"><strong>WISDOM AGHEDO</strong><small>AI VIDEO CREATOR</small></span></a>
+      <a class="back-link" href="index.html#selected-work" data-history-back>← Back</a>
+    </div>
+  </header>
+  <main id="case-study-main">
+    <div class="hero">
+      <p class="eyebrow" id="hero-category">PROJECT CASE STUDY</p>
+      <h1 id="hero-title">Project case study</h1>
+      <p class="hero-lead" id="hero-lead"></p>
+    </div>
+    <div class="quickfacts" id="quickfacts"></div>
+    <div class="chapter-progress"><div class="progress-top"><span>THE PROJECT STORY</span><strong id="progress-label">01 / 05</strong></div><div class="progress-track"><span id="progress-fill"></span></div></div>
+    <nav class="chapter-nav" id="chapter-nav" aria-label="Jump to case study chapter"></nav>
+    <div class="chapters" id="chapters"></div>
+
+    <section class="final-film" aria-labelledby="final-film-title">
+      <div class="final-film-heading">
+        <p class="final-film-eyebrow">THE FINISHED PIECE</p>
+        <h2 id="final-film-title">Watch the final video</h2>
+        <p>After the concept, AI production, and edit, here's the finished piece in full.</p>
+      </div>
+      <div class="video-frame" id="video-frame" aria-label="Project video"><div class="video-placeholder-label"><strong>Project video</strong>Loading video preview…</div></div>
+      <div class="player-caption"><span id="player-category">AI VIDEO PROJECT</span><span id="player-note">Autoplaying muted · use the Vimeo controls to turn sound on</span></div>
+    </section>
+
+    <div class="footer-actions">
+      <a class="button-link secondary" href="index.html#selected-work" data-history-back>← Back</a>
+      <a class="button-link" href="index.html#contact">Start a Project ↗</a>
+    </div>
+    <section class="more-work" aria-labelledby="more-work-title">
+      <div class="more-work-heading"><div><p class="more-work-eyebrow">KEEP EXPLORING</p><h2 id="more-work-title">More work, different worlds.</h2></div><p>Take a look at a few other projects.</p></div>
+      <div class="more-work-grid" id="related-projects"></div>
+    </section>
+  </main>
+  <script>
+    const vimeoMain = '1236463039';
+    const projects = {
+      'hero-reel': {
+        title:'Cinematic Visual Storytelling', brand:'Wisdom Aghedo Showreel', category:'Director’s Cut', orientation:'horizontal', vimeoId:'1236463039',
+        lead:'A curated reel of AI-generated commercials, product visuals, and cinematic storytelling.',
+        overview:'A compilation of AI-generated commercials, realistic visual storytelling, and 3D product animations, curated to demonstrate the range of visual work.',
+        role:'AI Video Creator', duration:'Showreel', timeline:'Compilation', tools:['Midjourney v6','Runway Gen-2','After Effects','ElevenLabs'], deliverables:['Master showreel'],
+        chapters:[
+          {nav:'Overview', kicker:'01 / THE REEL', title:'Cinematic visual storytelling', paragraphs:['This reel brings together a selection of commercial, product, and cinematic AI video work.']},
+          {nav:'Approach', kicker:'02 / CREATIVE APPROACH', title:'Different styles, one visual point of view', paragraphs:['Each piece explores a different visual direction while keeping attention on composition, movement, lighting, and story.']},
+          {nav:'Tools', kicker:'03 / WORKFLOW', title:'A flexible AI production toolkit', paragraphs:['The process combines AI image and video generation with editing and finishing tools.'], tools:['Midjourney v6','Runway Gen-2','After Effects','ElevenLabs']},
+          {nav:'Deliverables', kicker:'04 / DELIVERABLES', title:'One showreel', paragraphs:['A single master reel presenting the work in one viewing experience.'], bullets:['Commercial visuals','Product animation','Cinematic visual storytelling']},
+          {nav:'Credits', kicker:'05 / CREDITS', title:'Project credits', paragraphs:['Created by Wisdom Aghedo.']}
+        ]
+      },
+      'proj-olamax-vertical': {
+        title:'Bringing a Crypto App to Life Through AI-Powered 3D Animation', brand:'OlamaX', category:'AI App Advertisement · 16:9', orientation:'horizontal', vimeoId:'1236463039',
+        lead:'A one-minute character-led advertisement introducing the OlamaX mobile app through AI-generated 3D animation, built from concept and script to final edit.',
+        overview:'OlamaX had recently launched its mobile app and needed promotional content to introduce the platform and communicate its features. I developed the concept and script, created the AI-generated 3D animation, and handled the editing and final delivery. The goal was to communicate the app’s features through engaging visual storytelling rather than a conventional product demonstration.',
+        role:'AI Video Creator, Scriptwriter, and Video Editor', duration:'1 minute', timeline:'1–2 days', tools:['Gemini','Nano Banana','Google Flow','CapCut'], deliverables:['One-minute AI-generated 3D animated advertisement'],
+        chapters:[
+          {nav:'Overview', kicker:'01 / THE BRIEF', title:'Project overview', paragraphs:['OlamaX had recently launched its mobile app and needed promotional content to introduce the platform and communicate its features.','I developed the concept and script, created the AI-generated 3D animation, and handled the editing and final delivery.','The goal was to explain the app through engaging visual storytelling rather than a conventional product demonstration.'], facts:[['Deliverable','1-minute ad'],['Production','1–2 days'],['My role','End-to-end creator']]},
+          {nav:'Creative direction', kicker:'02 / CREATIVE DIRECTION', title:'A character-led 3D approach', paragraphs:['After researching advertising styles in the digital services market, I chose 3D animation as the creative direction for the project.','Having observed brands such as OPay use this style, I explored a similar approach for OlamaX. The focus was to showcase the app’s features with an engaging and distinctive visual presentation.'], subhead:'Character design', subparagraphs:['I designed two AI characters and created character reference sheets to guide their appearance throughout production. These references helped establish a visual guide before generating the animated scenes.'], assets:[['Character 01 reference sheet','AI-generated character design and visual reference.'],['Character 02 reference sheet','AI-generated character design and visual reference.']]},
+          {nav:'AI workflow', kicker:'03 / AI PRODUCTION', title:'From script to final edit', paragraphs:['I handled the project independently, from scriptwriting to final delivery. The workflow moved from defining the story, to preparing visual references, generating scenes, and assembling the final edit.','Some AI-generated scenes had visual inconsistencies. I corrected selected issues during editing to improve the final presentation.'], steps:[['Scriptwriting','Gemini','Developed the promotional script and narrative.'],['Character & image creation','Nano Banana','Prepared character references and visual assets.'],['AI video generation','Google Flow','Generated animated scenes for the advertisement.'],['Editing & delivery','CapCut','Assembled scenes and corrected selected inconsistencies.']], subhead:'Behind the scenes', assets:[['Generated images','Selected images created during production.'],['Animation frames','A few frames from the generated scenes.'],['CapCut editing timeline','A production screenshot showing the edit in progress.']]},
+          {nav:'Final video', kicker:'04 / FINAL VIDEO', title:'A one-minute app advertisement', paragraphs:['The final deliverable was a one-minute 3D animated advertisement designed to promote the OlamaX app.','The video introduced several app services through a short, character-led advertisement.'], bullets:['Buying and selling cryptocurrency','Transferring cryptocurrency','Purchasing airtime','Other app services']},
+          {nav:'Outcome & credits', kicker:'05 / OUTCOME & CREDITS', title:'Delivered and approved', paragraphs:['The video was completed within 1–2 days and approved by the client immediately after delivery. OlamaX subsequently published the advertisement across its social media platforms.','The project demonstrates my ability to develop a promotional concept, create AI-generated animation, and deliver a complete advertising video within a short production timeline.'], credits:[['Client','OlamaX'],['Services','Scriptwriting, AI video creation, video editing, and final delivery'],['Tools','Gemini, Nano Banana, Google Flow, and CapCut'],['Deliverable','One-minute AI-generated 3D animated advertisement']]}
+        ]
+      },
+      'proj-01-vertical': {
+        title:'Cyberpunk Beverage', brand:'Aura Energy', category:'AI UGC Ad', orientation:'vertical', vimeoId:'', lead:'A high-energy vertical AI ad concept for TikTok and Instagram Reels.', overview:'A high-energy, vertical AI-generated ad designed for TikTok and Instagram Reels to capture Gen Z audience attention.', challenge:'Creating photorealistic fluid dynamics and neon lighting exclusively using AI generation tools.', approach:'We trained a custom model on beverage splash photography and utilized prompt-chaining to achieve consistent neon aesthetics.', tools:['Midjourney v6','Runway Gen-2','ElevenLabs','CapCut'], deliverables:['1x 15s 9:16 Video','3x High-res Stills'], duration:'2 Weeks', role:'AI Video Creator', timeline:'2 weeks'
+      },
+      'proj-02-vertical': {
+        title:'Urban Streetwear Launch', brand:'Nova Thread', category:'AI Fashion Commercial', orientation:'vertical', vimeoId:'', lead:'A rapid-fire AI fashion lookbook blending urban environments with expressive fabric motion.', overview:'A rapid-fire fashion lookbook blending urban environments with impossible, gravity-defying fabric physics.', challenge:'Maintaining character and garment consistency across multiple rapid cuts and distinct AI prompts.', approach:'Used ControlNet for pose consistency and custom upscale pipelines for sharp fabric textures.', tools:['Stable Diffusion','ControlNet','Topaz Video AI'], deliverables:['1x 30s 9:16 Video'], duration:'3 Weeks', role:'AI Video Creator', timeline:'3 weeks', result:'Client reported a 45% lower CPA.'
+      },
+      'proj-03-vertical': {
+        title:'Minimalist Skincare', brand:'Glow & Co', category:'Realistic AI Brand Video', orientation:'vertical', vimeoId:'', lead:'Soft, ethereal, hyper-realistic macro visuals created with an AI-led production workflow.', overview:'Soft, ethereal, and hyper-realistic macro shots of skincare serums, generated entirely without a camera.', challenge:'Simulating accurate light refraction through glass bottles and viscous liquids.', approach:'Leveraged 3D reference renders fed into image-to-video AI for physically accurate lighting behaviors.', tools:['Blender','Runway Gen-2','DaVinci Resolve'], deliverables:['3x 10s 9:16 Loops'], duration:'1.5 Weeks', role:'AI Video Creator', timeline:'1.5 weeks'
+      },
+      'proj-04-horizontal': {
+        title:'Future of Mobility', brand:'AeroDrive', category:'Cinematic AI Film', orientation:'horizontal', vimeoId:'', lead:'A cinematic widescreen concept commercial built around a futuristic electric vehicle.', overview:'A cinematic widescreen commercial for a concept electric vehicle, showcasing futuristic cityscapes.', challenge:'Creating wide, sweeping drone-style shots with cohesive city architecture.', approach:'Stitched multiple AI-generated panoramas and used camera-projection techniques for parallax motion.', tools:['Midjourney v6','Pika Labs','After Effects'], deliverables:['1x 60s 16:9 Video','Sound Design'], duration:'4 Weeks', role:'AI Video Creator', timeline:'4 weeks', result:'Featured in Top 10 AI Commercials'
+      },
+      'proj-05-horizontal': {
+        title:'Textured Worlds', brand:'Playful Mints', category:'Claymation / Stop-Motion', orientation:'horizontal', vimeoId:'', lead:'A tactile stop-motion-inspired AI animation with a playful, handcrafted feel.', overview:'A tactile, stop-motion style animation generated via AI, giving a nostalgic feel to a modern brand.', approach:'Used custom LoRAs trained on real clay textures and forced lower frame-rate interpolations.', tools:['Stable Diffusion XL','Custom LoRA','Premiere Pro'], deliverables:['1x 15s 16:9 Video'], duration:'2 Weeks', role:'AI Video Creator', timeline:'2 weeks'
+      },
+      'proj-06-horizontal': {
+        title:'Tech Gear Reveal', brand:'SoundWave Pro', category:'3D Product Animation', orientation:'horizontal', vimeoId:'', lead:'A sleek product reveal focused on metallic textures and dramatic lighting.', overview:'A sleek, dark-mode product reveal focusing on metallic textures and dramatic lighting.', approach:'Hybrid approach: traditional 3D rendering for the product, AI generation for the complex ambient environments.', tools:['Cinema 4D','Octane Render','Runway Gen-2'], deliverables:['1x 45s 16:9 Video'], duration:'3 Weeks', role:'AI Video Creator', timeline:'3 weeks'
+      }
+    };
+
+    const qs = new URLSearchParams(window.location.search);
+    const projectId = qs.get('project') || 'proj-olamax-vertical';
+    const project = projects[projectId];
+    const escapeHTML = (value) => String(value ?? '').replace(/[&<>"']/g, ch => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch]));
+    const node = (id) => document.getElementById(id);
+
+    function renderError() {
+      node('case-study-main').innerHTML = `<div class="error-state"><p class="eyebrow">PROJECT NOT FOUND</p><h1>We couldn’t find that case study.</h1><p>Return to Selected Work and choose a project to explore.</p><div class="footer-actions"><a class="button-link" href="index.html#selected-work" data-history-back>← Back</a></div></div>`;
+    }
+
+    function renderVideo() {
+      const frame = node('video-frame');
+      if (!project.vimeoId) {
+        frame.classList.add('is-placeholder');
+        frame.innerHTML = `<div class="video-placeholder-label"><strong>${escapeHTML(project.title)} video</strong>This project's hosted video has not been added yet. Its case-study content is available below.</div>`;
+        node('player-note').textContent = 'Video embed pending · case study content available below';
+        return;
+      }
+      // Unlike the silent carousel preview, the case-study player uses Vimeo's normal controls.
+      // It starts muted to satisfy autoplay policies, but viewers can unmute, pause, seek, or replay it.
+      const params = new URLSearchParams({ autoplay:'1', muted:'1', loop:'1', autopause:'0', playsinline:'1', controls:'1', title:'0', byline:'0', portrait:'0', dnt:'1' });
+      frame.innerHTML = `<iframe title="${escapeHTML(project.title)} video player with sound controls" src="https://player.vimeo.com/video/${encodeURIComponent(project.vimeoId)}?${params.toString()}" allow="autoplay; fullscreen; picture-in-picture; encrypted-media" allowfullscreen loading="eager" referrerpolicy="strict-origin-when-cross-origin"></iframe>`;
+    }
+
+    function renderQuickfacts() {
+      const facts = [
+        ['CLIENT / BRAND', project.brand || 'Project'],
+        ['VIDEO LENGTH', project.duration || 'See deliverables'],
+        ['PRODUCTION TIME', project.timeline || project.duration || 'Not specified'],
+        ['MY ROLE', project.role || 'AI Video Creator']
+      ];
+      node('quickfacts').innerHTML = facts.map(([label,value]) => `<div class="quickfact"><span>${escapeHTML(label)}</span><strong>${escapeHTML(value)}</strong></div>`).join('');
+    }
+
+    function chapterData() {
+      if (Array.isArray(project.chapters)) return project.chapters;
+      const c = [];
+      c.push({nav:'Overview',kicker:'01 / PROJECT OVERVIEW',title:'Project overview',paragraphs:[project.overview || 'Project overview details will be added here.']});
+      if (project.challenge) c.push({nav:'Challenge',kicker:'02 / THE CHALLENGE',title:'The challenge',paragraphs:[project.challenge]});
+      if (project.approach) c.push({nav:project.challenge?'Approach':'Creative approach',kicker:'03 / CREATIVE APPROACH',title:'The approach',paragraphs:[project.approach]});
+      c.push({nav:'Tools & output',kicker:'04 / PRODUCTION',title:'Tools and deliverables',paragraphs:['The project details currently available are listed below.'],tools:project.tools || [],bullets:project.deliverables || []});
+      c.push({nav:'Outcome',kicker:'05 / PROJECT NOTES',title:project.result?'Outcome':'Project notes',paragraphs:[project.result || 'No campaign-performance result has been supplied for this project yet.'],facts:[['Duration',project.duration || 'Not supplied'],['Format',project.orientation === 'horizontal'?'16:9 landscape':'9:16 vertical'],['Brand',project.brand || 'Project']]});
+      return c;
+    }
+
+    function renderChapter(chapter,index) {
+      const paragraphs = (chapter.paragraphs || []).map(p => `<p>${escapeHTML(p)}</p>`).join('');
+      const subparagraphs = (chapter.subparagraphs || []).map(p => `<p>${escapeHTML(p)}</p>`).join('');
+      const bullets = chapter.bullets?.length ? `<ul class="bullet-grid">${chapter.bullets.map(x=>`<li>${escapeHTML(x)}</li>`).join('')}</ul>` : '';
+      const tools = chapter.tools?.length ? `<ul class="bullet-grid">${chapter.tools.map(x=>`<li>${escapeHTML(x)}</li>`).join('')}</ul>` : '';
+      const facts = chapter.facts?.length ? `<div class="bullet-grid">${chapter.facts.map(([label,value])=>`<li><span class="highlight">${escapeHTML(label)}:</span> ${escapeHTML(value)}</li>`).join('')}</div>` : '';
+      const steps = chapter.steps?.length ? `<div class="workflow">${chapter.steps.map((s,i)=>`<div class="workflow-step"><span class="step-num">${String(i+1).padStart(2,'0')}</span><div><strong>${escapeHTML(s[0])}</strong><small>${escapeHTML(s[1])}</small><p>${escapeHTML(s[2])}</p></div></div>`).join('')}</div>` : '';
+      const assets = chapter.assets?.length ? `<div class="asset-grid">${chapter.assets.map(a=>`<div class="asset-placeholder"><span class="asset-art" aria-hidden="true">＋</span><div><strong>${escapeHTML(a[0])}</strong><small>${escapeHTML(a[1])}</small></div></div>`).join('')}</div>` : '';
+      const credits = chapter.credits?.length ? `<div class="credits">${chapter.credits.map(([label,value])=>`<div class="credit"><span>${escapeHTML(label)}</span><strong>${escapeHTML(value)}</strong></div>`).join('')}</div>` : '';
+      const subhead = chapter.subhead ? `<h3>${escapeHTML(chapter.subhead)}</h3>` : '';
+      return `<section class="chapter" id="chapter-${index}" data-chapter="${index}"><div class="chapter-head"><span class="chapter-kicker">${escapeHTML(chapter.kicker || `0${index+1} / PROJECT STORY`)}</span><span class="chapter-number">${String(index+1).padStart(2,'0')}</span></div><h2>${escapeHTML(chapter.title)}</h2>${paragraphs}${subhead}${subparagraphs}${steps}${tools}${bullets}${facts}${assets}${credits}</section>`;
+    }
+
+    function readSelectedWorkReturn() {
+      try {
+        const state = JSON.parse(sessionStorage.getItem('wisdomSelectedWorkReturnV1') || 'null');
+        if (state && Date.now() - Number(state.savedAt || 0) < 30 * 60 * 1000) return state;
+      } catch (_) { /* Storage may be disabled; the normal history fallback still works. */ }
+      return null;
+    }
+
+    document.addEventListener('click', (event) => {
+      const backLink = event.target.closest('[data-history-back]');
+      if (!backLink) return;
+      event.preventDefault();
+      if (window.history.length > 1) {
+        window.history.back();
+        return;
+      }
+      const savedReturn = readSelectedWorkReturn();
+      if (savedReturn && savedReturn.returnUrl) {
+        window.location.href = savedReturn.returnUrl;
+      } else {
+        window.location.href = backLink.getAttribute('href') || 'index.html#selected-work';
+      }
+    });
+
+    function renderRelatedProjects() {
+      const host = node('related-projects');
+      if (!host) return;
+      const available = Object.entries(projects)
+        .filter(([id, item]) => id !== projectId && id !== 'hero-reel' && item.orientation === 'vertical')
+        .slice(0, 3);
+      host.innerHTML = available.map(([id, item]) => `
+        <a class="more-work-card" href="case-study.html?project=${encodeURIComponent(id)}" aria-label="Explore case study: ${escapeHTML(item.title)}">
+          <span><small>${escapeHTML(item.brand || item.category || 'Selected work')}</small><strong>${escapeHTML(item.title)}</strong></span>
+          <span class="more-work-arrow" aria-hidden="true">↗</span>
+        </a>`).join('');
+    }
+
+    function render() {
+      if (!project) { renderError(); return; }
+      document.title = `${project.title} | Case Study — Wisdom Aghedo`;
+      node('hero-category').textContent = `${project.brand || 'PROJECT'} · ${project.category || 'AI VIDEO'}`;
+      node('hero-title').textContent = project.caseStudyTitle || project.title;
+      node('hero-lead').textContent = project.lead || project.overview || 'Explore the creative process behind this project.';
+      node('player-category').textContent = `${project.brand || 'PROJECT'} / ${project.category || 'VIDEO STORY'}`;
+      renderQuickfacts(); renderVideo(); renderRelatedProjects();
+      const chapters = chapterData();
+      node('chapter-nav').innerHTML = chapters.map((c,i)=>`<a href="#chapter-${i}" data-nav-index="${i}" class="${i===0?'is-active':''}"><span>${String(i+1).padStart(2,'0')}</span>${escapeHTML(c.nav || c.title)}</a>`).join('');
+      node('chapters').innerHTML = chapters.map(renderChapter).join('');
+      node('progress-label').textContent = `01 / ${String(chapters.length).padStart(2,'0')}`;
+      node('progress-fill').style.width = `${100/Math.max(1,chapters.length)}%`;
+      const sections = [...document.querySelectorAll('[data-chapter]')];
+      const links = [...document.querySelectorAll('[data-nav-index]')];
+      const updateActive = (index) => {
+        const safe = Math.max(0,Math.min(sections.length-1,index));
+        links.forEach((link,i)=>link.classList.toggle('is-active',i===safe));
+        node('progress-label').textContent = `${String(safe+1).padStart(2,'0')} / ${String(sections.length).padStart(2,'0')}`;
+        node('progress-fill').style.width = `${((safe+1)/Math.max(1,sections.length))*100}%`;
+      };
+      if (!('IntersectionObserver' in window) || window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        sections.forEach(s=>s.classList.add('is-visible'));
+      } else {
+        const observer = new IntersectionObserver(entries=>entries.forEach(entry=>{
+          if(!entry.isIntersecting)return;
+          entry.target.classList.add('is-visible');
+          updateActive(Number(entry.target.dataset.chapter));
+        }),{threshold:.12,rootMargin:'-4% 0px -25% 0px'});
+        sections.forEach(s=>observer.observe(s));
+      }
+      links.forEach(link=>link.addEventListener('click',()=>{
+        const index=Number(link.dataset.navIndex);
+        const target=sections[index];
+        if(target) { target.classList.add('is-visible'); updateActive(index); }
+      }));
+    }
+    render();
+  </script>
+</body>
+</html>
